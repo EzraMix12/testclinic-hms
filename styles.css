@@ -7,6 +7,46 @@
  */
 
 /* ========================================
+   Tailwind Override - Force Custom Responsive Behavior
+   ======================================== */
+/* Force responsive table behavior regardless of Tailwind interference */
+.responsive-table {
+  display: table !important;
+}
+
+.mobile-cards-container {
+  display: none !important;
+}
+
+/* Mobile: Hide table, show cards */
+@media screen and (max-width: 767px) {
+  .responsive-table {
+    display: none !important;
+  }
+  .mobile-cards-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  .mobile-bottom-nav {
+    display: flex !important;
+  }
+}
+
+/* Tablet/Desktop: Show table, hide cards and mobile nav */
+@media screen and (min-width: 768px) {
+  .responsive-table {
+    display: table !important;
+  }
+  .mobile-cards-container {
+    display: none !important;
+  }
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* ========================================
    Root Variables (Light Theme Default)
    ======================================== */
 :root {
