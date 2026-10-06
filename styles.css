@@ -1311,12 +1311,12 @@ body.modal-open {
 @media (max-width: 767px) {
   /* Hide table element on mobile */
   table.responsive-table {
-    display: none;
+    display: none !important;
   }
   
   /* Show mobile card container */
   .mobile-cards-container {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: var(--spacing-md);
   }
@@ -2972,8 +2972,9 @@ table.responsive-table {
   min-height: 300px; /* Prevents layout shift when data loads */
 }
 
-/* Mobile cards container - maintain height during loading */
+/* Mobile cards container - hidden by default, shown only on mobile via media query */
 .mobile-cards-container {
+  display: none;
   min-height: 400px; /* Prevents jump when cards appear */
 }
 
