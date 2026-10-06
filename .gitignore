@@ -1,0 +1,53 @@
+# Vercel
+.vercel
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Kiro spec/internal files
+.kiro/
+
+# Test HTML files
+test-*.html
+task-11-animation-test.html
+task-12.4-performance-test.html
+task-7-quick-test.html
+touch-interactions-test.html
+design-tokens-example.html
+
+# Task/validation markdown docs
+task-*.md
+TASK-*.md
+accessibility-test-guide.md
+AUTO-DEPLOY-SETUP.md
+DEMO-CHECKLIST.md
+DEPLOYMENT.md
+GITHUB-UPLOAD-GUIDE.md
+QUICK-START.md
+styles-documentation.md
+
+# Test JS
+design-tokens.test.js
+
+# Deploy scripts (not needed in repo)
+deploy.ps1
+upload-to-github.ps1

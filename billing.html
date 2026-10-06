@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseClinic - Billing & Cashier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="design-tokens.js"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Skip to main content link for accessibility (Requirement 5.4) -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-sky-500 text-white p-2 rounded-xl shadow-sm"><i class="fa-solid fa-house-medical text-lg"></i></div>
+                <span class="font-bold text-lg text-slate-900">Pulse<span class="text-sky-500">Clinic</span></span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-1">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard & Queue</a>
+                <a href="registry.html">Patient Registry</a>
+                <a href="emr.html">Consultation (EMR)</a>
+                <a href="billing.html" class="nav-active">Billing & Cashier</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <!-- Tablet Hamburger Button (768px-1024px) -->
+                <button class="hamburger-button" onclick="openTabletMenu()" aria-label="Open navigation menu" aria-expanded="false" id="hamburger-btn">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+                
+                <div class="text-xs font-semibold text-slate-800">Dr. Sarah Jenkins</div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="glass-card p-6 space-y-4">
+                <h3 class="font-bold text-slate-900 border-b border-slate-200/50 pb-3">New Transaction</h3>
+                <div><label class="block text-xs font-semibold uppercase text-slate-700 mb-1" for="bill-patient">Select Patient <span class="required-indicator" aria-label="required">*</span></label><select id="bill-patient" class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm" aria-label="Select patient for billing" aria-required="true"></select></div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-700 mb-1" for="item-sel">Add Service / Item</label>
+                    <div class="flex gap-2">
+                        <select id="item-sel" class="flex-grow p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm" aria-label="Select billing item or service">
+                            <option value="Consultation Fee|500">Consultation Fee - ₱500</option>
+                            <option value="Paracetamol 500mg (10s)|120">Paracetamol 10s - ₱120</option>
+                            <option value="Random Blood Sugar|350">Random Blood Sugar - ₱350</option>
+                            <option value="Medical Certificate|150">Medical Certificate - ₱150</option>
+                        </select>
+                        <button onclick="addItem()" class="bg-sky-500 text-white px-4 rounded-lg text-sm" aria-label="Add selected item to bill">Add</button>
+                    </div>
+                </div>
+                <hr class="border-slate-200/50">
+                <div class="flex justify-between font-bold text-lg"><span>Total:</span><span id="total-amt" class="text-sky-600" role="status" aria-live="polite" aria-label="Total amount">₱0.00</span></div>
+                <button onclick="pay()" class="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold" aria-label="Process payment">Process Payment</button>
+            </div>
+
+            <div class="lg:col-span-2 glass-card p-6 overflow-hidden">
+                <h3 class="font-bold text-slate-900 border-b border-slate-200/50 pb-3 mb-4">Itemized Bill Summary</h3>
+                <table class="w-full text-left border-collapse responsive-table" role="table" aria-label="Itemized bill summary">
+                    <thead><tr class="bg-slate-50/50 text-slate-700 text-xs uppercase"><th class="p-3" scope="col">Description</th><th class="p-3 text-right" scope="col">Price</th><th class="p-3 text-center" scope="col">Action</th></tr></thead>
+                    <tbody id="bill-tbody" class="divide-y text-sm"><tr><td colspan="3" class="p-6 text-center text-slate-500">No items added.</td></tr></tbody>
+                </table>
+                <!-- Mobile Cards Container (< 768px) -->
+                <div id="bill-cards" class="mobile-cards-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MOBILE BOTTOM NAVIGATION (< 768px viewports) -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="index.html" class="mobile-nav-link" aria-label="Home">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="dashboard.html" class="mobile-nav-link" aria-label="Dashboard and Queue">
+            <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+            <span>Queue</span>
+        </a>
+        <a href="registry.html" class="mobile-nav-link" aria-label="Patient Registry">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
+            <span>Registry</span>
+        </a>
+        <a href="emr.html" class="mobile-nav-link" aria-label="Electronic Medical Records">
+            <i class="fa-solid fa-file-medical" aria-hidden="true"></i>
+            <span>EMR</span>
+        </a>
+        <a href="billing.html" class="mobile-nav-link mobile-nav-active" aria-label="Billing and Cashier" aria-current="page">
+            <i class="fa-solid fa-receipt" aria-hidden="true"></i>
+            <span>Billing</span>
+        </a>
+    </nav>
+
+    <!-- TABLET MENU (768px-1024px viewports) -->
+    <div class="tablet-menu-overlay" onclick="closeTabletMenu()" id="tablet-overlay" role="presentation"></div>
+    <aside class="tablet-menu-sidebar" id="tablet-menu" role="dialog" aria-modal="true" aria-labelledby="tablet-menu-title">
+        <div class="tablet-menu-header">
+            <h3 id="tablet-menu-title">Navigation</h3>
+            <button class="tablet-menu-close" onclick="closeTabletMenu()" aria-label="Close navigation menu" id="menu-close-btn">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </div>
+        <nav class="tablet-menu-nav" aria-label="Main Navigation">
+            <a href="index.html">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
+                Home
+            </a>
+            <a href="dashboard.html">
+                <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+                Dashboard & Queue
+            </a>
+            <a href="registry.html">
+                <i class="fa-solid fa-users" aria-hidden="true"></i>
+                Patient Registry
+            </a>
+            <a href="emr.html">
+                <i class="fa-solid fa-file-medical" aria-hidden="true"></i>
+                Consultation (EMR)
+            </a>
+            <a href="billing.html" class="tablet-nav-active" aria-current="page">
+                <i class="fa-solid fa-receipt" aria-hidden="true"></i>
+                Billing & Cashier
+            </a>
+        </nav>
+    </aside>
+
+    <script>
+        // Tablet Menu JavaScript - Focus trapping and keyboard support
+        let focusableElements = [];
+        let firstFocusableElement = null;
+        let lastFocusableElement = null;
+
+        function openTabletMenu() {
+            const overlay = document.getElementById('tablet-overlay');
+            const menu = document.getElementById('tablet-menu');
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            
+            // Add active classes
+            overlay.classList.add('active');
+            menu.classList.add('active');
+            document.body.classList.add('tablet-menu-open');
+            
+            // Update ARIA
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            
+            // Set up focus trapping
+            focusableElements = menu.querySelectorAll(
+                'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            );
+            firstFocusableElement = focusableElements[0];
+            lastFocusableElement = focusableElements[focusableElements.length - 1];
+            
+            // Focus first element (close button)
+            setTimeout(() => {
+                const closeBtn = document.getElementById('menu-close-btn');
+                closeBtn.focus();
+            }, 100);
+            
+            // Add keyboard event listeners
+            document.addEventListener('keydown', handleTabletMenuKeydown);
+        }
+
+        function closeTabletMenu() {
+            const overlay = document.getElementById('tablet-overlay');
+            const menu = document.getElementById('tablet-menu');
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            
+            // Remove active classes
+            overlay.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.classList.remove('tablet-menu-open');
+            
+            // Update ARIA
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            
+            // Restore focus to hamburger button
+            hamburgerBtn.focus();
+            
+            // Remove keyboard event listeners
+            document.removeEventListener('keydown', handleTabletMenuKeydown);
+        }
+
+        function handleTabletMenuKeydown(e) {
+            // Close on Escape key
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                closeTabletMenu();
+                return;
+            }
+            
+            // Focus trapping with Tab key
+            if (e.key === 'Tab') {
+                if (e.shiftKey) { // Shift + Tab
+                    if (document.activeElement === firstFocusableElement) {
+                        e.preventDefault();
+                        lastFocusableElement.focus();
+                    }
+                } else { // Tab
+                    if (document.activeElement === lastFocusableElement) {
+                        e.preventDefault();
+                        firstFocusableElement.focus();
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script src="storage.js"></script>
+    <script src="form-validation.js"></script>
+    <script src="touch-interactions.js"></script>
+    <script src="animation-utils.js"></script>
+    <script src="will-change-manager.js"></script>
+    <script>
+        let billItems = [];
+        function initBill() {
+            document.getElementById('bill-patient').innerHTML = getPatients().map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+            renderBill();
+        }
+        function addItem() {
+            const [desc, price] = document.getElementById('item-sel').value.split('|');
+            billItems.push({ desc, price: parseFloat(price) });
+            renderBill();
+        }
+        function renderBill() {
+            const tbody = document.getElementById('bill-tbody');
+            const cardsContainer = document.getElementById('bill-cards');
+            
+            if(!billItems.length) { 
+                tbody.innerHTML = `<tr><td colspan="3" class="p-6 text-center text-slate-500">No items added.</td></tr>`; 
+                cardsContainer.innerHTML = '<div class="p-6 text-center text-slate-500">No items added.</div>';
+                document.getElementById('total-amt').innerText='₱0.00'; 
+                return; 
+            }
+            
+            let total = 0;
+            tbody.innerHTML = '';
+            cardsContainer.innerHTML = '';
+            
+            billItems.forEach((b, i) => {
+                total += b.price;
+                
+                // Render table row (desktop/tablet)
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50">
+                        <td class="p-3">${b.desc}</td>
+                        <td class="p-3 text-right font-semibold">₱${b.price.toFixed(2)}</td>
+                        <td class="p-3 text-center"><button onclick="billItems.splice(${i},1);renderBill()" class="text-red-500 touch-target" aria-label="Remove ${b.desc} from bill"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></td>
+                    </tr>`;
+                
+                // Render mobile card (< 768px)
+                cardsContainer.innerHTML += `
+                    <div class="mobile-card">
+                        <div class="mobile-card-row">
+                            <span class="mobile-card-label">Description</span>
+                            <span class="mobile-card-value">${b.desc}</span>
+                        </div>
+                        <div class="mobile-card-row">
+                            <span class="mobile-card-label">Price</span>
+                            <span class="mobile-card-value font-semibold text-sky-600">₱${b.price.toFixed(2)}</span>
+                        </div>
+                        <div class="mobile-card-actions">
+                            <button onclick="billItems.splice(${i},1);renderBill()" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg text-sm font-medium touch-target" aria-label="Remove ${b.desc} from bill"><i class="fa-solid fa-trash" aria-hidden="true"></i> Remove</button>
+                        </div>
+                    </div>`;
+            });
+            
+            document.getElementById('total-amt').innerText = `₱${total.toFixed(2)}`;
+        }
+        function pay() {
+            if(!billItems.length) return alert('Add items first');
+            alert('Payment processed successfully!');
+            billItems = [];
+            renderBill();
+        }
+        initBill();
+    </script>
+</body>
+</html>

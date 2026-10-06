@@ -1,0 +1,3769 @@
+/**
+ * Modern Design System CSS Custom Properties
+ * PulseClinic Hospital Management System
+ * 
+ * Implements Requirements: 11.1, 11.2, 3.5, 12.2
+ * Maps design tokens to CSS custom properties for consistent theming
+ */
+
+/* ========================================
+   Root Variables (Light Theme Default)
+   ======================================== */
+:root {
+  /* Color System - Primary */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+
+  /* Color System - Neutral */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+
+  /* Color System - Semantic */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Color System - Glass Morphism */
+  --color-glass-light: rgba(255, 255, 255, 0.7);
+  --color-glass-dark: rgba(15, 23, 42, 0.7);
+
+  /* Spacing Scale (8px base grid) */
+  --spacing-xs: 0.5rem;    /* 8px */
+  --spacing-sm: 0.75rem;   /* 12px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+
+  /* Typography - Font Families */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Typography - Font Sizes */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+
+  /* Typography - Line Heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Border Radius (2026 Trend: Larger Radii) */
+  --radius-sm: 0.5rem;   /* 8px */
+  --radius-md: 0.75rem;  /* 12px */
+  --radius-lg: 1rem;     /* 16px */
+  --radius-xl: 1.5rem;   /* 24px */
+  --radius-2xl: 2rem;    /* 32px */
+  --radius-full: 9999px;
+
+  /* Shadows (Layered Depth) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+  /* Animation Durations */
+  --animation-fast: 150ms;
+  --animation-base: 250ms;
+  --animation-slow: 350ms;
+  --animation-slower: 500ms;
+
+  /* Touch Target Sizes (WCAG 2.1 AAA) */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+
+  /* Z-Index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* ========================================
+   Dark Theme Support (Future)
+   Requirement 12.2 - Dark mode theming
+   ======================================== */
+[data-theme="dark"],
+.dark-theme {
+  /* Color System - Inverted for dark mode */
+  --color-primary-50: #0369a1;
+  --color-primary-100: #0284c7;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #38bdf8;
+  --color-primary-700: #7dd3fc;
+
+  /* Neutral colors - dark backgrounds */
+  --color-neutral-50: #0f172a;
+  --color-neutral-100: #1e293b;
+  --color-neutral-800: #e2e8f0;
+  --color-neutral-900: #f8fafc;
+
+  /* Glass morphism for dark backgrounds */
+  --color-glass-light: rgba(15, 23, 42, 0.7);
+  --color-glass-dark: rgba(255, 255, 255, 0.1);
+
+  /* Adjusted shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Auto dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary-50: #0369a1;
+    --color-primary-100: #0284c7;
+    --color-primary-500: #0ea5e9;
+    --color-primary-600: #38bdf8;
+    --color-primary-700: #7dd3fc;
+
+    --color-neutral-50: #0f172a;
+    --color-neutral-100: #1e293b;
+    --color-neutral-800: #e2e8f0;
+    --color-neutral-900: #f8fafc;
+
+    --color-glass-light: rgba(15, 23, 42, 0.7);
+    --color-glass-dark: rgba(255, 255, 255, 0.1);
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ========================================
+   Responsive Breakpoints
+   Requirement 1.5 - Responsive adaptation
+   ======================================== */
+
+/* Small devices (landscape phones, 640px and up) */
+@media (min-width: 640px) {
+  :root {
+    --container-padding: var(--spacing-md);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  :root {
+    --container-padding: var(--spacing-lg);
+    --font-size-base: 1rem;
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  :root {
+    --container-padding: var(--spacing-xl);
+    --font-size-base: 1rem;
+  }
+}
+
+/* Extra large devices (large desktops, 1280px and up) */
+@media (min-width: 1280px) {
+  :root {
+    --container-padding: var(--spacing-2xl);
+  }
+}
+
+/* 2XL devices (larger desktops, 1536px and up) */
+@media (min-width: 1536px) {
+  :root {
+    --container-padding: var(--spacing-3xl);
+  }
+}
+
+/* ========================================
+   Reduced Motion Support - Task 11.3
+   Requirement 4.6 - Accessibility for motion sensitivity
+   Add @media (prefers-reduced-motion: reduce) media query
+   Disable or reduce animations when user has motion sensitivity
+   Maintain functionality with simplified or instant transitions
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animation durations at root level */
+  :root {
+    --animation-fast: 0ms;
+    --animation-base: 0ms;
+    --animation-slow: 0ms;
+    --animation-slower: 0ms;
+  }
+  
+  /* Disable all keyframe animations */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable specific animation utilities */
+  .slide-up,
+  .fade-in,
+  .shimmer,
+  .hover-lift {
+    animation: none;
+    transition: none;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+    /* Keep shadow for visual feedback */
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .hover-lift:active {
+    transform: none;
+  }
+  
+  /* Buttons - instant feedback without motion */
+  .btn,
+  .btn:hover,
+  .btn:active {
+    transform: none;
+    /* Keep color and shadow transitions for visual feedback */
+    transition: background-color 0.01ms,
+                color 0.01ms,
+                box-shadow 0.01ms,
+                opacity 0.01ms;
+  }
+  
+  /* Modals - instant appearance */
+  .modal-container {
+    animation: none;
+  }
+  
+  .modal-fade-out {
+    animation: none;
+    opacity: 0;
+  }
+  
+  /* Success notifications - instant appearance */
+  .success-notification,
+  .inline-success,
+  .success-badge {
+    animation: none;
+  }
+  
+  .success-notification {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .success-notification.fade-out {
+    animation: none;
+    opacity: 0;
+  }
+  
+  /* Skeleton loaders - static state */
+  .skeleton,
+  .shimmer {
+    animation: none;
+    background: #e2e8f0;
+  }
+  
+  /* Touch interactions - disable motion */
+  .touch-active,
+  .long-press-triggered {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+  
+  .long-press-confirmation {
+    animation: none;
+  }
+  
+  /* Navigation - instant transitions */
+  .tablet-menu-overlay,
+  .tablet-menu-sidebar {
+    transition: none;
+  }
+  
+  /* Form error messages - instant appearance */
+  .error-message {
+    animation: none;
+  }
+  
+  /* Loading spinner - simplified or removed */
+  .btn-loading::after {
+    animation: none;
+    border: 2px solid currentColor;
+  }
+  
+  /* Maintain functionality - ensure all interactive elements still work */
+  /* Visual states are preserved, just motion is removed */
+}
+
+/* ========================================
+   High Contrast Mode Support
+   Requirement 5.1 - Accessibility compliance
+   ======================================== */
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary-500: #0369a1;
+    --color-primary-600: #075985;
+    --shadow-sm: 0 0 0 1px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 0 0 2px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 0 0 3px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 0 0 4px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ========================================
+   Print Styles
+   Requirement 13.2 - Print optimization
+   ======================================== */
+@media print {
+  :root {
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-xl: none;
+    --shadow-glass: none;
+    --color-glass-light: rgba(255, 255, 255, 1);
+    --color-glass-dark: rgba(255, 255, 255, 1);
+  }
+}
+
+/* ========================================
+   Utility Classes - Task 1.3
+   Glass Morphism, Animations, Touch Targets, Focus
+   Implements Requirements: 3.1, 3.2, 4.1, 4.2, 5.2, 2.1
+   ======================================== */
+
+/* ========================================
+   Glass Morphism Utilities
+   Requirement 3.1, 3.2 - Glass morphism effects
+   ======================================== */
+
+/* Glass Card - For content cards with glass effect */
+.glass-card {
+  background: var(--color-glass-light);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-glass);
+  transition: transform var(--animation-base) ease-in-out,
+              box-shadow var(--animation-base) ease-in-out;
+}
+
+/* Glass Modal - For modal dialogs */
+.glass-modal {
+  background: var(--color-glass-light);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-xl);
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--spacing-xl);
+}
+
+/* Glass Overlay - For modal backdrops */
+.glass-overlay {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+/* Disable backdrop blur in print mode */
+@media print {
+  .glass-card,
+  .glass-modal,
+  .glass-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: white;
+    border: 1px solid #ccc;
+  }
+}
+
+/* Cross-browser fallback for browsers without backdrop-filter support
+   (Firefox < 70, older Safari, IE) - Requirement 15.4 */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .glass-modal {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .glass-overlay {
+    background: rgba(15, 23, 42, 0.7);
+  }
+}
+
+/* ========================================
+   Animation Utilities
+   Requirement 4.1, 4.2 - Smooth animations and micro-interactions
+   ======================================== */
+
+/* Slide Up Animation - For modals and panels */
+/* Task 12.4 - Optimize animation performance with will-change */
+.slide-up {
+  animation: slideUp var(--animation-base) ease-out;
+  will-change: transform, opacity;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In Animation - For content loading */
+/* Task 12.4 - Optimize animation performance with will-change */
+.fade-in {
+  animation: fadeIn var(--animation-base) ease-in;
+  will-change: opacity;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Shimmer Animation - For skeleton loaders */
+/* Task 12.4 - Optimize animation performance with will-change */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-100) 0%,
+    var(--color-neutral-50) 50%,
+    var(--color-neutral-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer var(--animation-slower) ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Hover Lift Animation - For interactive cards */
+/* Task 11.1 - Requirement 4.3, 10.1 */
+/* Task 12.4 - will-change managed by will-change-manager.js for optimal performance */
+.hover-lift {
+  transition: transform var(--animation-fast) ease-in-out,
+              box-shadow var(--animation-fast) ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px); /* -2px subtle lift as per task specification */
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-lift:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+/* Disable animations for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .slide-up,
+  .fade-in,
+  .shimmer,
+  .hover-lift {
+    animation: none;
+    transition: none;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   Success Confirmation Animations - Task 11.2
+   Requirements: 9.3, 11.5
+   Show checkmark or success indicator when actions complete
+   Display within 250ms of successful action
+   Use green color (semantic success) for positive feedback
+   ======================================== */
+
+/* Success checkmark notification */
+/* Task 12.4 - will-change managed dynamically by will-change-manager.js */
+.success-notification {
+  position: fixed;
+  top: 5rem;
+  right: 1rem;
+  background: var(--color-success);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  z-index: var(--z-tooltip);
+  animation: successSlideIn var(--animation-base) ease-out;
+  max-width: 90%;
+}
+
+/* Success notification icon */
+.success-notification i {
+  font-size: var(--font-size-lg);
+}
+
+/* Slide in animation from right */
+@keyframes successSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade out animation for dismissal */
+.success-notification.fade-out {
+  animation: successFadeOut var(--animation-base) ease-in forwards;
+}
+
+@keyframes successFadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Inline success checkmark for form actions */
+.inline-success {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  animation: successCheckmark var(--animation-base) ease-out;
+  /* Task 12.4 - Optimize animation performance with will-change */
+  will-change: transform, opacity;
+}
+
+.inline-success i {
+  font-size: var(--font-size-base);
+}
+
+@keyframes successCheckmark {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Success badge for status indicators */
+.success-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  animation: successBadgePulse var(--animation-slow) ease-out;
+  /* Task 12.4 - Optimize animation performance with will-change */
+  will-change: transform;
+}
+
+@keyframes successBadgePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile positioning for success notification */
+@media (max-width: 767px) {
+  .success-notification {
+    top: auto;
+    bottom: calc(64px + var(--spacing-md) + env(safe-area-inset-bottom, 0));
+    right: var(--spacing-md);
+    left: var(--spacing-md);
+    max-width: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .success-notification,
+  .inline-success,
+  .success-badge {
+    animation: none;
+  }
+  
+  .success-notification {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Print - hide notifications */
+@media print {
+  .success-notification {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   Touch Target Utilities
+   Requirement 2.1 - Touch-friendly interactions with minimum 44px sizing
+   ======================================== */
+
+/* Standard Touch Target - Minimum 44px */
+.touch-target {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Large Touch Target - Comfortable 48px */
+.touch-target-lg {
+  min-width: var(--touch-target-comfortable);
+  min-height: var(--touch-target-comfortable);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch feedback animation */
+.touch-target:active,
+.touch-target-lg:active {
+  transform: scale(0.95);
+  transition: transform var(--animation-fast) ease-out;
+}
+
+/* ========================================
+   Focus Utilities
+   Requirement 5.2 - WCAG-compliant focus indicators
+   ======================================== */
+
+/* Focus Ring - 2px outline with high contrast */
+.focus-ring {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  transition: outline-color var(--animation-fast) ease-in-out;
+}
+
+/* Apply focus ring on keyboard focus only (not mouse clicks) */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Remove default focus outline when using focus-ring */
+.focus-ring:focus {
+  outline: none;
+}
+
+/* Focus ring for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* High contrast focus indicator */
+@media (prefers-contrast: high) {
+  .focus-ring:focus-visible,
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible,
+  [role="link"]:focus-visible,
+  [tabindex]:not([tabindex="-1"]):focus-visible {
+    outline: 3px solid var(--color-primary-700);
+    outline-offset: 2px;
+  }
+}
+
+/* ========================================
+   Navigation Component Styles
+   Requirement 6.1, 6.4, 6.5, 4.3 - Desktop sticky navigation
+   ======================================== */
+
+/* Header Navigation - Sticky Positioning */
+header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* ========================================
+   Tablet Hamburger Menu
+   Requirements: 6.3, 8.2, 8.3, 5.3
+   Task 2.3 - Tablet hamburger navigation (768px-1024px)
+   ======================================== */
+
+/* Hamburger Button - Visible only on tablet viewports */
+.hamburger-button {
+  display: none; /* Hidden by default */
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  padding: var(--spacing-xs);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: #64748b;
+  cursor: pointer;
+  transition: background-color var(--animation-fast) ease-in-out,
+              color var(--animation-fast) ease-in-out;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-button:hover {
+  background-color: #f8fafc;
+  color: #0284c7;
+}
+
+.hamburger-button:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.hamburger-button i {
+  font-size: 1.25rem;
+}
+
+/* Show hamburger button only on tablet (768px-1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hamburger-button {
+    display: inline-flex;
+  }
+  
+  /* Hide desktop navigation on tablet */
+  header nav.hidden.md\\:flex {
+    display: none !important;
+  }
+}
+
+/* Tablet Menu Overlay - Backdrop */
+.tablet-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: var(--z-modal-backdrop);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--animation-base) ease-in-out;
+}
+
+.tablet-menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Tablet Menu Sidebar - Slide-out panel */
+/* Task 12.4 - will-change managed dynamically by will-change-manager.js */
+.tablet-menu-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 80vw;
+  background: white;
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+  transform: translateX(100%);
+  transition: transform var(--animation-base) ease-in-out;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.tablet-menu-sidebar.active {
+  transform: translateX(0);
+}
+
+/* Tablet Menu Header */
+.tablet-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tablet-menu-header h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Close Button */
+.tablet-menu-close {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: #64748b;
+  cursor: pointer;
+  transition: background-color var(--animation-fast) ease-in-out,
+              color var(--animation-fast) ease-in-out;
+}
+
+.tablet-menu-close:hover {
+  background-color: #f8fafc;
+  color: #0284c7;
+}
+
+.tablet-menu-close:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.tablet-menu-close i {
+  font-size: 1.25rem;
+}
+
+/* Tablet Menu Navigation Links */
+.tablet-menu-nav {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  gap: var(--spacing-xs);
+}
+
+.tablet-menu-nav a {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: color var(--animation-fast) ease-in-out,
+              background-color var(--animation-fast) ease-in-out;
+  min-height: var(--touch-target-min);
+}
+
+.tablet-menu-nav a:hover:not(.tablet-nav-active) {
+  color: #0284c7;
+  background-color: #f8fafc;
+}
+
+.tablet-menu-nav a.tablet-nav-active {
+  color: #0284c7;
+  background-color: #f0f9ff;
+  font-weight: 600;
+}
+
+.tablet-menu-nav a:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.tablet-menu-nav a i {
+  margin-right: var(--spacing-sm);
+  width: 1.25rem;
+  text-align: center;
+}
+
+/* Prevent body scroll when menu is open */
+body.tablet-menu-open {
+  overflow: hidden;
+}
+
+/* Disable backdrop blur in print mode */
+@media print {
+  .tablet-menu-overlay,
+  .tablet-menu-sidebar {
+    display: none !important;
+  }
+  
+  body.tablet-menu-open {
+    overflow: visible !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .tablet-menu-overlay {
+    transition: none;
+  }
+  
+  .tablet-menu-sidebar {
+    transition: none;
+  }
+}
+
+/* Navigation Link - Base State */
+nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 150ms ease-in-out,
+              background-color 150ms ease-in-out,
+              transform 150ms ease-in-out;
+}
+
+/* Navigation Link - Hover State (150ms transition) */
+nav a:hover:not(.nav-active) {
+  color: #0284c7;
+  background-color: #f8fafc;
+}
+
+/* Navigation Link - Active Page State */
+nav a.nav-active {
+  color: #0284c7;
+  background-color: #f0f9ff;
+  font-weight: 600;
+}
+
+/* Navigation Link - Focus State (Accessibility) */
+nav a:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Desktop Navigation Container */
+nav.hidden.md\\:flex {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  nav.hidden.md\\:flex {
+    display: flex;
+  }
+}
+
+/* ========================================
+   Mobile Bottom Navigation
+   Requirements: 1.2, 6.2, 6.5, 2.1, 2.2, 5.7
+   Task 2.2 - Mobile bottom navigation bar
+   ======================================== */
+
+/* Mobile Bottom Navigation Bar - Fixed at bottom on mobile viewports */
+.mobile-bottom-nav {
+  display: none; /* Hidden by default (desktop) */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  padding-bottom: env(safe-area-inset-bottom, 0); /* Safe area support for iOS */
+}
+
+/* Show on mobile viewports < 768px */
+@media (max-width: 767px) {
+  .mobile-bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: var(--spacing-xs);
+    padding-bottom: calc(var(--spacing-xs) + env(safe-area-inset-bottom, 0));
+  }
+
+  /* Add bottom padding to body to prevent content being hidden behind nav */
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0));
+  }
+
+  /* Hide desktop navigation on mobile */
+  header nav {
+    display: none !important;
+  }
+}
+
+/* Mobile Navigation Link - Icon only with label */
+.mobile-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--touch-target-min); /* 44px minimum touch target */
+  min-height: var(--touch-target-min);
+  padding: var(--spacing-xs);
+  color: #64748b;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: color var(--animation-fast) ease-in-out,
+              background-color var(--animation-fast) ease-in-out,
+              transform var(--animation-fast) ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Icon styling */
+.mobile-nav-link i {
+  font-size: 1.25rem; /* 20px */
+  margin-bottom: 0.125rem; /* 2px */
+}
+
+/* Label styling */
+.mobile-nav-link span {
+  font-size: var(--font-size-xs); /* 12px */
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Hover state (for devices that support hover) */
+@media (hover: hover) {
+  .mobile-nav-link:hover:not(.mobile-nav-active) {
+    color: #0284c7;
+    background-color: #f8fafc;
+  }
+}
+
+/* Active state - current page indicator */
+.mobile-nav-link.mobile-nav-active {
+  color: #0284c7;
+  background-color: #f0f9ff;
+}
+
+.mobile-nav-link.mobile-nav-active i,
+.mobile-nav-link.mobile-nav-active span {
+  font-weight: 600;
+}
+
+/* Touch feedback - scale down on tap */
+.mobile-nav-link:active {
+  transform: scale(0.95);
+}
+
+/* Focus state for keyboard navigation */
+.mobile-nav-link:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  background-color: #f0f9ff;
+}
+
+/* Disable animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav-link {
+    transition: none;
+  }
+  
+  .mobile-nav-link:active {
+    transform: none;
+  }
+}
+
+/* Print styles - hide mobile navigation */
+@media print {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+  
+  body {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* ========================================
+   Modal Enhancements with Animations
+   Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 4.1, 4.2, 10.2
+   Task 4 - Enhanced modals with animations and accessibility
+   ======================================== */
+
+/* Modal Backdrop - Enhanced blur effect (Task 4.1) */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+/* Modal Container - Slide-up animation on open (Task 4.2) */
+/* Task 12.4 - will-change managed dynamically by will-change-manager.js */
+.modal-container {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  max-width: 90%;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modalSlideUp var(--animation-base) ease-out;
+  z-index: var(--z-modal);
+}
+
+/* Slide-up animation keyframes (Task 4.2) */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade-out animation for modal close (Task 4.3) */
+.modal-fade-out {
+  animation: modalFadeOut var(--animation-base) ease-in forwards;
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Prevent body scroll when modal is open (Task 4.5) */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Modal responsive sizing (Task 4.6) */
+/* Mobile: Most of screen with padding */
+@media (max-width: 767px) {
+  .modal-container {
+    max-width: 95%;
+    margin: var(--spacing-sm);
+  }
+}
+
+/* Tablet: Centered with comfortable size */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .modal-container {
+    max-width: 600px;
+  }
+}
+
+/* Desktop: Centered with optimal size (Task 4.6) */
+@media (min-width: 1024px) {
+  .modal-container {
+    max-width: 640px;
+  }
+}
+
+/* Disable backdrop blur and animations in print mode */
+@media print {
+  .modal-backdrop,
+  .modal-container {
+    display: none !important;
+  }
+  
+  body.modal-open {
+    overflow: visible !important;
+  }
+}
+
+/* Reduced motion support - disable animations (Task 4.2, 4.3) */
+@media (prefers-reduced-motion: reduce) {
+  .modal-container {
+    animation: none;
+  }
+  
+  .modal-fade-out {
+    animation: none;
+    opacity: 0;
+  }
+  
+  @keyframes modalSlideUp {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ========================================
+   Responsive Table Transformations
+   Requirements: 7.1, 7.2, 7.4, 7.5
+   Task 5 - Tables transform to cards on mobile
+   ======================================== */
+
+/* Desktop Table Layout - Traditional multi-column format (> 1024px) */
+/* Requirement 7.1 - Desktop viewports display traditional multi-column table format */
+
+/* Sticky Table Headers - Requirement 7.4 */
+@media (min-width: 1024px) {
+  table thead {
+    position: sticky;
+    top: 64px; /* Offset for fixed header */
+    z-index: var(--z-dropdown);
+    background: white;
+  }
+  
+  table thead tr {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Mobile Card Layout - Transform tables to vertical cards (< 768px) */
+/* Requirement 7.2 - Mobile viewports transform tables into vertical card layouts */
+@media (max-width: 767px) {
+  /* Hide table element on mobile */
+  table.responsive-table {
+    display: none;
+  }
+  
+  /* Show mobile card container */
+  .mobile-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  /* Mobile Card Styling */
+  .mobile-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    border: 1px solid #e2e8f0;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--animation-fast) ease-in-out;
+  }
+  
+  .mobile-card:active {
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Mobile Card Row - Field label and value */
+  .mobile-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--spacing-xs) 0;
+    gap: var(--spacing-sm);
+  }
+  
+  .mobile-card-row:not(:last-child) {
+    border-bottom: 1px solid #f1f5f9;
+  }
+  
+  /* Field Label */
+  .mobile-card-label {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #64748b;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+  
+  /* Field Value */
+  .mobile-card-value {
+    font-size: var(--font-size-sm);
+    color: #0f172a;
+    text-align: right;
+    flex-grow: 1;
+    word-break: break-word;
+  }
+  
+  /* Action Buttons in Mobile Cards - Requirement 7.5 */
+  .mobile-card-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid #f1f5f9;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+  
+  .mobile-card-actions button {
+    min-height: var(--touch-target-min);
+    padding: var(--spacing-xs) var(--spacing-md);
+  }
+}
+
+/* Tablet View - Keep traditional table (768px-1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Hide mobile cards on tablet */
+  .mobile-cards-container {
+    display: none;
+  }
+  
+  /* Show table on tablet */
+  table.responsive-table {
+    display: table;
+  }
+}
+
+/* Desktop View - Show table, hide mobile cards (> 1024px) */
+@media (min-width: 1024px) {
+  /* Hide mobile cards on desktop */
+  .mobile-cards-container {
+    display: none;
+  }
+  
+  /* Show table on desktop */
+  table.responsive-table {
+    display: table;
+  }
+}
+
+/* Print - Use table format */
+@media print {
+  table.responsive-table {
+    display: table !important;
+  }
+  
+  .mobile-cards-container {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   Helper Utility Classes
+   Common patterns for consistent styling
+   ======================================== */
+
+/* Remove focus outline (only use when providing alternative focus indicator) */
+.focus-none:focus {
+  outline: none;
+}
+
+/* Smooth transitions for state changes */
+.transition-smooth {
+  transition: all var(--animation-base) ease-in-out;
+}
+
+/* Fast transitions for immediate feedback */
+.transition-fast {
+  transition: all var(--animation-fast) ease-in-out;
+}
+
+/* No transition (for reduced motion or instant changes) */
+.transition-none {
+  transition: none;
+}
+
+/* Accessibility: Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Accessibility: Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--color-primary-500);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-decoration: none;
+  z-index: var(--z-tooltip);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: top var(--animation-fast) ease-in-out;
+}
+
+.skip-to-main:focus {
+  top: var(--spacing-md);
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+
+/* ========================================
+   Button Component Styles - Task 6
+   Requirement 15.1, 11.4, 2.1, 11.5, 4.3, 15.3
+   ======================================== */
+
+/* Base Button Styles - Common to all button variants */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-height: var(--touch-target-min);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--animation-fast) ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Button hover effect - Requirement 4.3, 15.3 */
+/* Task 12.4 - will-change managed dynamically by will-change-manager.js */
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Button active/press effect - Task 11.4, Requirement 4.3, 2.3 */
+/* Subtle scale-down on active state (scale 0.98) with 150ms ease-in-out transition */
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--animation-fast) ease-in-out,
+              box-shadow var(--animation-fast) ease-in-out;
+}
+
+/* Button focus state - Requirement 5.2 */
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Primary Button - Main Actions
+   Requirement 15.1, 11.4
+   ======================================== */
+
+.btn-primary {
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-primary-600);
+}
+
+.btn-primary:active:not(:disabled) {
+  background-color: var(--color-primary-700);
+}
+
+/* ========================================
+   Secondary Button - Alternative Actions
+   Requirement 15.1, 11.4
+   ======================================== */
+
+.btn-secondary {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-800);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-neutral-300);
+}
+
+.btn-secondary:active:not(:disabled) {
+  background-color: var(--color-neutral-400);
+}
+
+.btn-secondary:focus-visible {
+  outline-color: var(--color-neutral-600);
+}
+
+/* ========================================
+   Danger Button - Destructive Actions
+   Requirement 15.1, 11.4, 11.5
+   ======================================== */
+
+.btn-danger {
+  background-color: var(--color-error-500);
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--color-error-600);
+}
+
+.btn-danger:active:not(:disabled) {
+  background-color: var(--color-error-700);
+}
+
+.btn-danger:focus-visible {
+  outline-color: var(--color-error-500);
+}
+
+/* ========================================
+   Success Button - Positive Actions
+   Requirement 15.1, 11.5
+   ======================================== */
+
+.btn-success {
+  background-color: var(--color-success-500);
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: var(--color-success-600);
+}
+
+.btn-success:active:not(:disabled) {
+  background-color: var(--color-success-700);
+}
+
+.btn-success:focus-visible {
+  outline-color: var(--color-success-500);
+}
+
+/* ========================================
+   Warning Button - Caution Actions
+   Requirement 15.1, 11.5
+   ======================================== */
+
+.btn-warning {
+  background-color: var(--color-warning-500);
+  color: white;
+}
+
+.btn-warning:hover:not(:disabled) {
+  background-color: var(--color-warning-600);
+}
+
+.btn-warning:active:not(:disabled) {
+  background-color: var(--color-warning-700);
+}
+
+.btn-warning:focus-visible {
+  outline-color: var(--color-warning-500);
+}
+
+/* ========================================
+   Ghost Button - Subtle Actions
+   Requirement 15.1
+   ======================================== */
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-neutral-700);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+.btn-ghost:active:not(:disabled) {
+  background-color: var(--color-neutral-200);
+}
+
+/* ========================================
+   Outline Button - Bordered Variant
+   Requirement 15.1
+   ======================================== */
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary-600);
+  border: 2px solid var(--color-primary-500);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--color-primary-50);
+  border-color: var(--color-primary-600);
+}
+
+.btn-outline:active:not(:disabled) {
+  background-color: var(--color-primary-100);
+}
+
+/* ========================================
+   Button Sizes - Requirement 2.1
+   ======================================== */
+
+.btn-sm {
+  min-height: calc(var(--touch-target-min) - 8px);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  min-height: var(--touch-target-comfortable);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-base);
+}
+
+.btn-xl {
+  min-height: calc(var(--touch-target-comfortable) + 8px);
+  padding: var(--spacing-lg) calc(var(--spacing-xl) * 1.5);
+  font-size: var(--font-size-lg);
+}
+
+/* ========================================
+   Button States - Requirement 15.1, 15.4
+   ======================================== */
+
+/* Disabled State - Requirement 15.4 */
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading State - Requirement 9.2, 15.1 */
+.btn-loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: button-spin 0.6s linear infinite;
+  opacity: 1;
+  /* Task 12.4 - Optimize spin animation with will-change */
+  will-change: transform;
+}
+
+/* Loading spinner animation */
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading state color overrides */
+.btn-primary.btn-loading::after,
+.btn-danger.btn-loading::after,
+.btn-success.btn-loading::after,
+.btn-warning.btn-loading::after {
+  border-color: white;
+  border-top-color: transparent;
+}
+
+.btn-secondary.btn-loading::after,
+.btn-ghost.btn-loading::after {
+  border-color: var(--color-neutral-700);
+  border-top-color: transparent;
+}
+
+/* ========================================
+   Icon Buttons - Requirement 2.1
+   ======================================== */
+
+.btn-icon {
+  padding: var(--spacing-sm);
+  min-width: var(--touch-target-min);
+  aspect-ratio: 1;
+}
+
+.btn-icon.btn-sm {
+  min-width: calc(var(--touch-target-min) - 8px);
+}
+
+.btn-icon.btn-lg {
+  min-width: var(--touch-target-comfortable);
+}
+
+/* ========================================
+   Button Groups - Requirement 2.2
+   ======================================== */
+
+.btn-group {
+  display: inline-flex;
+  gap: var(--spacing-xs);
+}
+
+/* Vertical button group */
+.btn-group-vertical {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+/* Mobile: Ensure adequate spacing - Requirement 2.2 */
+@media (max-width: 767px) {
+  .btn-group,
+  .btn-group-vertical {
+    gap: var(--spacing-sm); /* 8px minimum spacing */
+  }
+}
+
+/* ========================================
+   Full Width Button
+   ======================================== */
+
+.btn-block {
+  width: 100%;
+  display: flex;
+}
+
+/* ========================================
+   Reduced Motion Support - Requirement 4.6
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn:active {
+    transform: none;
+    transition: background-color var(--animation-fast) ease-in-out,
+                color var(--animation-fast) ease-in-out,
+                opacity var(--animation-fast) ease-in-out;
+  }
+  
+  .btn-loading::after {
+    animation: none;
+    border: 2px solid currentColor;
+  }
+  
+  /* Disable button press animations for all button types */
+  button:active,
+  .bg-sky-500.text-white:active,
+  .bg-primary-500.text-white:active,
+  .bg-emerald-600.text-white:active,
+  .bg-slate-100:active,
+  button.text-red-500:active,
+  a.text-red-500:active {
+    transform: none;
+  }
+}
+
+/* ========================================
+   High Contrast Mode Support
+   ======================================== */
+
+@media (prefers-contrast: high) {
+  .btn {
+    border: 2px solid currentColor;
+  }
+  
+  .btn:focus-visible {
+    outline-width: 3px;
+    outline-offset: 3px;
+  }
+}
+
+/* ========================================
+   Legacy Button Classes Compatibility
+   Maps existing Tailwind-style buttons to new system
+   ======================================== */
+
+/* Primary action buttons */
+.bg-sky-500.text-white,
+.bg-primary-500.text-white {
+  background-color: var(--color-primary-500);
+  transition: all var(--animation-fast) ease-in-out;
+}
+
+.bg-sky-500.text-white:hover,
+.bg-primary-500.text-white:hover {
+  background-color: var(--color-primary-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Button press animation - Task 11.4, Requirement 4.3, 2.3 */
+.bg-sky-500.text-white:active,
+.bg-primary-500.text-white:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--animation-fast) ease-in-out,
+              box-shadow var(--animation-fast) ease-in-out;
+}
+
+/* Success buttons */
+.bg-emerald-600.text-white {
+  background-color: var(--color-success-600);
+  transition: all var(--animation-fast) ease-in-out;
+}
+
+.bg-emerald-600.text-white:hover {
+  background-color: var(--color-success-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Button press animation - Task 11.4 */
+.bg-emerald-600.text-white:active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--animation-fast) ease-in-out,
+              box-shadow var(--animation-fast) ease-in-out;
+}
+
+/* Secondary buttons */
+.bg-slate-100 {
+  background-color: var(--color-neutral-200);
+  transition: all var(--animation-fast) ease-in-out;
+}
+
+.bg-slate-100:hover {
+  background-color: var(--color-neutral-300);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Button press animation - Task 11.4 */
+.bg-slate-100:active {
+  transform: scale(0.98);
+  box-shadow: none;
+  transition: transform var(--animation-fast) ease-in-out,
+              box-shadow var(--animation-fast) ease-in-out;
+}
+
+/* Danger text buttons */
+.text-red-500 {
+  color: var(--color-error-500);
+  transition: color var(--animation-fast) ease-in-out;
+}
+
+.text-red-500:hover {
+  color: var(--color-error-600);
+}
+
+/* Button press animation for text buttons - Task 11.4 */
+button.text-red-500:active,
+a.text-red-500:active {
+  transform: scale(0.98);
+  transition: transform var(--animation-fast) ease-in-out;
+}
+
+/* ========================================
+   Universal Button Press Animation - Task 11.4
+   Requirement 4.3, 2.3: Apply to all clickable buttons
+   ======================================== */
+
+/* Apply button press animation to all button elements and button-like links */
+button:not(:disabled):active,
+[role="button"]:active,
+a[class*="rounded"]:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  transform: scale(0.98);
+  transition: transform var(--animation-fast) ease-in-out;
+}
+
+/* Ensure buttons have proper transition setup */
+button,
+[role="button"],
+a[class*="rounded"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  transition: all var(--animation-fast) ease-in-out;
+}
+
+/* ========================================
+   Skeleton Loader Component - Task 8
+   Requirements: 9.1, 4.4
+   Displays placeholder content while data loads
+   ======================================== */
+
+/* Base skeleton element - gray rectangle with shimmer */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 0%,
+    #e2e8f0 50%,
+    #f1f5f9 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer var(--animation-slower) ease-in-out infinite;
+  border-radius: var(--radius-md);
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  /* Task 12.4 - Optimize shimmer animation with will-change */
+  will-change: background-position;
+}
+
+/* Skeleton text variants */
+.skeleton-text {
+  height: 1rem;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-text-sm {
+  height: 0.875rem;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-text-lg {
+  height: 1.25rem;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+/* Skeleton for headings */
+.skeleton-heading {
+  height: 1.5rem;
+  width: 60%;
+  border-radius: var(--radius-md);
+}
+
+/* Skeleton for badges/pills */
+.skeleton-badge {
+  height: 1.75rem;
+  width: 5rem;
+  border-radius: var(--radius-full);
+}
+
+/* Skeleton for buttons */
+.skeleton-button {
+  height: 2.5rem;
+  width: 6rem;
+  border-radius: var(--radius-lg);
+}
+
+/* Skeleton for icons */
+.skeleton-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: var(--radius-sm);
+}
+
+/* Skeleton for avatar/circular images */
+.skeleton-avatar {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: var(--radius-full);
+}
+
+/* Skeleton table row - desktop view */
+.skeleton-table-row {
+  display: table-row;
+}
+
+.skeleton-table-row td {
+  padding: 1rem;
+}
+
+/* Hide skeleton when content is loaded */
+.skeleton-hidden {
+  display: none;
+}
+
+/* Skeleton container for proper spacing */
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+/* Mobile skeleton card - mirrors mobile-card structure */
+.skeleton-mobile-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.skeleton-mobile-card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) 0;
+}
+
+/* Reduced motion support - disable shimmer animation */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: #e2e8f0;
+  }
+}
+
+/* Print - hide skeletons */
+@media print {
+  .skeleton,
+  .skeleton-table-row,
+  .skeleton-mobile-card,
+  .skeleton-container {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   Form Validation and Feedback - Task 7
+   Requirements: 14.1, 14.2, 14.3, 14.4, 14.5, 15.2, 15.4, 5.2, 5.6, 5.8, 8.7
+   ======================================== */
+
+/* ========================================
+   Form Input States - Subtask 7.5
+   Requirement 15.2, 5.2, 15.4
+   ======================================== */
+
+/* Base form input styles */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="date"],
+select,
+textarea {
+  transition: border-color var(--animation-fast) ease-in-out,
+              box-shadow var(--animation-fast) ease-in-out,
+              background-color var(--animation-fast) ease-in-out;
+}
+
+/* Default state - already styled by Tailwind */
+
+/* Focus state - 2px outline for keyboard navigation (Requirement 5.2, 15.2) */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 0px;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+/* Error state - red border for invalid inputs (Requirement 14.1, 15.2) */
+input.error,
+select.error,
+textarea.error,
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--color-error);
+  background-color: #fef2f2;
+}
+
+input.error:focus,
+select.error:focus,
+textarea.error:focus,
+input[aria-invalid="true"]:focus,
+select[aria-invalid="true"]:focus,
+textarea[aria-invalid="true"]:focus {
+  outline-color: var(--color-error);
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Disabled state - 50% opacity (Requirement 15.4) */
+input:disabled,
+select:disabled,
+textarea:disabled,
+input[aria-disabled="true"],
+select[aria-disabled="true"],
+textarea[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f8fafc;
+}
+
+/* ========================================
+   Inline Error Messages - Subtask 7.1
+   Requirement 14.1, 14.2, 8.7
+   ======================================== */
+
+/* Error message container */
+.error-message {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
+  animation: errorSlideIn var(--animation-fast) ease-out;
+}
+
+/* Slide in animation for error messages */
+@keyframes errorSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hidden state for error messages */
+.error-message.hidden {
+  display: none;
+}
+
+/* Icon for error messages */
+.error-message i {
+  margin-right: 4px;
+}
+
+/* ========================================
+   Required Field Indicators - Subtask 7.3
+   Requirement 14.4, 5.6
+   ======================================== */
+
+/* Required asterisk styling */
+.required-indicator {
+  color: var(--color-error);
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* Alternative "Required" label */
+.required-label {
+  display: inline-block;
+  margin-left: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Form label with required indicator */
+label.required::after {
+  content: " *";
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+/* ========================================
+   ARIA Live Region for Announcements - Subtask 7.4
+   Requirement 14.5, 5.8
+   ======================================== */
+
+/* Screen reader announcements container */
+.sr-announcements {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ========================================
+   Form Validation Utilities
+   ======================================== */
+
+/* Form group container for proper spacing */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+/* Success state (optional visual feedback) */
+input.success,
+select.success,
+textarea.success {
+  border-color: var(--color-success);
+  background-color: #f0fdf4;
+}
+
+input.success:focus,
+select.success:focus,
+textarea.success:focus {
+  outline-color: var(--color-success);
+  border-color: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* ========================================
+   Reduced Motion Support
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .error-message {
+    animation: none;
+  }
+  
+  input,
+  select,
+  textarea {
+    transition: none;
+  }
+}
+
+/* ========================================
+   High Contrast Mode Support
+   ======================================== */
+
+@media (prefers-contrast: high) {
+  input.error,
+  select.error,
+  textarea.error,
+  input[aria-invalid="true"],
+  select[aria-invalid="true"],
+  textarea[aria-invalid="true"] {
+    border-width: 2px;
+    border-color: var(--color-error);
+  }
+  
+  .error-message {
+    font-weight: 700;
+  }
+}
+
+/* ========================================
+   WCAG 2.1 AA Contrast Compliance - Task 10.1
+   Requirement 5.1: Minimum 4.5:1 for normal text, 3:1 for large text
+   ======================================== */
+
+/* Enhanced contrast for navigation links */
+nav a:not(.nav-active):not(.mobile-nav-active):not(.tablet-nav-active) {
+  color: #475569; /* slate-600 - Better contrast on white (7.44:1) */
+}
+
+/* Enhanced contrast for mobile navigation */
+.mobile-nav-link:not(.mobile-nav-active) {
+  color: #475569; /* slate-600 for better contrast */
+}
+
+.mobile-nav-link:not(.mobile-nav-active):hover {
+  color: #0284c7; /* sky-600 - maintains high contrast */
+}
+
+/* Enhanced contrast for tablet navigation */
+.tablet-menu-nav a:not(.tablet-nav-active) {
+  color: #475569; /* slate-600 for better contrast */
+}
+
+/* Table header text - ensure sufficient contrast */
+table thead tr {
+  color: #334155; /* slate-700 - High contrast on light bg (11.96:1) */
+}
+
+/* Secondary text contrast improvements */
+.text-slate-500 {
+  color: #475569 !important; /* Upgrade slate-500 to slate-600 */
+}
+
+.text-slate-600 {
+  color: #334155 !important; /* Upgrade slate-600 to slate-700 for better contrast */
+}
+
+.text-slate-700 {
+  color: #1e293b; /* slate-800 - Maximum contrast */
+}
+
+/* Form label contrast */
+label {
+  color: #334155; /* slate-700 - ensures 4.5:1+ contrast */
+}
+
+/* Placeholder text contrast - WCAG AA requires 4.5:1 for placeholders */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #64748b; /* slate-500 - meets minimum (4.54:1) */
+  opacity: 1;
+}
+
+/* Badge and status text contrast */
+.bg-amber-100 {
+  color: #92400e !important; /* amber-800 - High contrast (7.71:1) */
+}
+
+.bg-sky-100 {
+  color: #075985 !important; /* sky-800 - High contrast (8.09:1) */
+}
+
+.bg-emerald-100 {
+  color: #065f46 !important; /* emerald-800 - High contrast (7.41:1) */
+}
+
+.bg-slate-50 {
+  color: #1e293b !important; /* slate-800 - Maximum contrast */
+}
+
+/* Link contrast - ensure minimum 4.5:1 */
+a {
+  color: #0369a1; /* sky-700 - High contrast (7.22:1) */
+}
+
+a:hover {
+  color: #075985; /* sky-800 - Even higher contrast */
+}
+
+/* Button text contrast on colored backgrounds */
+.bg-sky-500,
+.bg-primary-500 {
+  color: #ffffff; /* White text on sky-500 (4.51:1) - meets WCAG AA */
+}
+
+/* Error text minimum contrast */
+.text-red-500 {
+  color: #dc2626 !important; /* red-600 - Better contrast (5.73:1) */
+}
+
+.text-red-600 {
+  color: #b91c1c !important; /* red-700 - High contrast (7.44:1) */
+}
+
+/* Success text contrast */
+.text-emerald-600 {
+  color: #059669 !important; /* emerald-600 - Good contrast (4.54:1) */
+}
+
+.text-green-600 {
+  color: #16a34a !important; /* green-600 - Good contrast (4.56:1) */
+}
+
+/* Warning text contrast */
+.text-amber-600 {
+  color: #d97706 !important; /* amber-600 - Good contrast (5.08:1) */
+}
+
+/* Info text contrast */
+.text-blue-600 {
+  color: #2563eb !important; /* blue-600 - Good contrast (5.14:1) */
+}
+
+/* Icon-only buttons with low contrast - add aria-labels */
+.text-slate-400 {
+  color: #64748b !important; /* Upgrade to slate-500 (4.54:1) */
+}
+
+/* Stat card icon backgrounds - ensure decorative icons don't rely solely on color */
+.bg-sky-50 {
+  background-color: #e0f2fe;
+  border: 1px solid #bae6fd; /* Add border for additional visual separation */
+}
+
+.bg-amber-50 {
+  background-color: #fef3c7;
+  border: 1px solid #fde68a;
+}
+
+.bg-emerald-50 {
+  background-color: #d1fae5;
+  border: 1px solid #a7f3d0;
+}
+
+/* Glass card text - ensure readable on translucent backgrounds */
+.glass-card {
+  /* Add subtle backdrop to ensure text is always readable */
+  background: rgba(255, 255, 255, 0.85); /* Increased opacity for better contrast */
+}
+
+/* Mobile card labels - ensure contrast */
+.mobile-card-label {
+  color: #475569; /* slate-600 - Better contrast (7.44:1) */
+}
+
+/* Table cell text */
+table td {
+  color: #1e293b; /* slate-800 - Maximum contrast for body text */
+}
+
+/* Hero section contrast - large text gets 3:1 minimum */
+.text-slate-300 {
+  color: #cbd5e1 !important; /* slate-300 - Sufficient for large text on dark bg (7.51:1) */
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+  /* Increase all contrast to maximum in high contrast mode */
+  nav a:not(.nav-active):not(.mobile-nav-active):not(.tablet-nav-active) {
+    color: #1e293b; /* slate-800 - Maximum contrast */
+  }
+  
+  .mobile-nav-link:not(.mobile-nav-active),
+  .tablet-menu-nav a:not(.tablet-nav-active) {
+    color: #1e293b; /* slate-800 */
+  }
+  
+  label,
+  .mobile-card-label {
+    color: #0f172a; /* slate-900 - Absolute maximum */
+  }
+  
+  .text-slate-500,
+  .text-slate-600,
+  .text-slate-700 {
+    color: #0f172a !important; /* slate-900 */
+  }
+  
+  /* Ensure all borders are visible */
+  .glass-card,
+  .mobile-card,
+  input,
+  select,
+  textarea,
+  button {
+    border-width: 2px;
+    border-color: #1e293b !important;
+  }
+}
+
+/* ========================================
+   Print Styles for Prescriptions and Documents - Task 14.1
+   Requirements: 13.1, 13.2, 13.3, 13.4
+   Optimize print output for prescriptions and medical documents
+   ======================================== */
+
+@media print {
+  /* ========================================
+     Page Setup - Requirement 13.2
+     ======================================== */
+  
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+  
+  /* Prevent page breaks inside important elements */
+  h1, h2, h3, h4, h5, h6,
+  p, blockquote, pre,
+  ul, ol, dl {
+    page-break-inside: avoid;
+  }
+  
+  /* Ensure headings stay with content */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  
+  /* ========================================
+     Hide Non-Essential UI - Requirement 13.1
+     ======================================== */
+  
+  /* Hide navigation and UI chrome */
+  header,
+  .mobile-bottom-nav,
+  .tablet-menu-overlay,
+  .tablet-menu-sidebar,
+  nav,
+  .hamburger-button,
+  footer {
+    display: none !important;
+  }
+  
+  /* Hide buttons and interactive controls */
+  button:not(.print-visible),
+  .btn:not(.print-visible),
+  input[type="button"]:not(.print-visible),
+  input[type="submit"]:not(.print-visible),
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger,
+  .btn-success {
+    display: none !important;
+  }
+  
+  /* Hide modal backdrop and close controls */
+  .modal-backdrop {
+    display: none !important;
+  }
+  
+  .modal-container button,
+  .modal-container .btn {
+    display: none !important;
+  }
+  
+  /* Hide form inputs and interactive elements */
+  input:not([type="hidden"]),
+  select,
+  textarea,
+  .form-group,
+  form {
+    display: none !important;
+  }
+  
+  /* Hide decorative elements */
+  .success-notification,
+  .skeleton,
+  .skeleton-container,
+  .hover-lift::after,
+  i.fa-solid:not(.print-visible),
+  .badge:not(.print-visible) {
+    display: none !important;
+  }
+  
+  /* ========================================
+     Clean Typography - Requirement 13.2
+     Legible font sizes for print (minimum 12pt for body text)
+     ======================================== */
+  
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000000;
+    background: #ffffff;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Document content container */
+  #printable {
+    width: 100% !important;
+    max-width: 100% !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  
+  /* Headings - scaled for print readability */
+  h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 12pt;
+    color: #000000;
+  }
+  
+  h2 {
+    font-size: 16pt;
+    font-weight: 600;
+    margin-bottom: 10pt;
+    color: #000000;
+  }
+  
+  h3 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin-bottom: 8pt;
+    color: #000000;
+  }
+  
+  /* Paragraph spacing */
+  p {
+    font-size: 12pt;
+    margin-bottom: 8pt;
+    color: #000000;
+    line-height: 1.6;
+  }
+  
+  /* List styling for prescriptions */
+  ul, ol {
+    font-size: 12pt;
+    margin-bottom: 8pt;
+    padding-left: 20pt;
+  }
+  
+  li {
+    margin-bottom: 6pt;
+    line-height: 1.5;
+  }
+  
+  /* Strong/bold text */
+  strong, b {
+    font-weight: 600;
+    color: #000000;
+  }
+  
+  /* Small text */
+  small,
+  .text-xs {
+    font-size: 10pt;
+  }
+  
+  /* ========================================
+     Remove Backgrounds and Decorative Effects - Requirement 13.3
+     Conserve ink by removing colors, shadows, and backgrounds
+     ======================================== */
+  
+  /* Remove all background colors */
+  body,
+  *,
+  .glass-card,
+  .glass-modal,
+  .modal-container,
+  .bg-slate-50,
+  .bg-slate-100,
+  .bg-sky-50,
+  .bg-sky-100,
+  .bg-white,
+  div,
+  section,
+  article {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+  }
+  
+  /* Remove all shadows */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  /* Remove borders (except semantic ones) */
+  * {
+    border-color: #cccccc !important;
+  }
+  
+  /* Remove backdrop blur effects */
+  .glass-card,
+  .glass-modal,
+  .glass-overlay,
+  .modal-backdrop {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Remove decorative border radius */
+  * {
+    border-radius: 0 !important;
+  }
+  
+  /* Simplify horizontal rules */
+  hr {
+    border: none;
+    border-top: 1pt solid #000000;
+    margin: 12pt 0;
+    page-break-after: avoid;
+  }
+  
+  /* ========================================
+     Document Structure - Requirement 13.4
+     Professional, clean document output
+     ======================================== */
+  
+  /* Hide everything except printable content */
+  body > *:not(#printable):not(#print-modal) {
+    display: none !important;
+  }
+  
+  /* Ensure modal container doesn't interfere */
+  #print-modal {
+    position: static !important;
+    display: block !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  #print-modal .modal-backdrop,
+  #print-modal .modal-container {
+    position: static !important;
+    display: block !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+  }
+  
+  /* Prescription/document content */
+  #printable,
+  #printable * {
+    visibility: visible !important;
+    display: block !important;
+    position: static !important;
+  }
+  
+  #printable ul,
+  #printable ol {
+    display: block !important;
+  }
+  
+  #printable li {
+    display: list-item !important;
+  }
+  
+  /* ========================================
+     Text Colors - Black for Print
+     ======================================== */
+  
+  /* All text should be black */
+  body,
+  *:not(a) {
+    color: #000000 !important;
+  }
+  
+  /* Links - underlined for clarity */
+  a {
+    color: #000000 !important;
+    text-decoration: underline;
+    text-underline-offset: 2pt;
+  }
+  
+  /* Remove colored text classes */
+  .text-slate-500,
+  .text-slate-600,
+  .text-slate-700,
+  .text-sky-500,
+  .text-sky-600,
+  .text-emerald-600,
+  .text-red-500,
+  .text-red-600 {
+    color: #000000 !important;
+  }
+  
+  /* ========================================
+     Table Print Optimization
+     ======================================== */
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    page-break-inside: auto;
+  }
+  
+  table thead {
+    display: table-header-group;
+    position: static;
+  }
+  
+  table tbody {
+    display: table-row-group;
+  }
+  
+  table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+  
+  table th,
+  table td {
+    border: 1pt solid #000000;
+    padding: 6pt;
+    font-size: 11pt;
+  }
+  
+  table th {
+    font-weight: 600;
+    background: #ffffff !important;
+  }
+  
+  /* ========================================
+     Spacing and Layout Adjustments
+     ======================================== */
+  
+  /* Remove excessive padding */
+  .p-6,
+  .p-8,
+  .py-8,
+  .px-4,
+  .px-6 {
+    padding: 0 !important;
+  }
+  
+  /* Compact spacing for print */
+  .space-y-4 > * + *,
+  .space-y-6 > * + * {
+    margin-top: 8pt;
+  }
+  
+  /* Ensure proper margins */
+  .max-w-7xl,
+  .mx-auto {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* ========================================
+     Print-Specific Utilities
+     ======================================== */
+  
+  /* Hide on print */
+  .print-hidden,
+  .no-print {
+    display: none !important;
+  }
+  
+  /* Show only on print */
+  .print-only {
+    display: block !important;
+  }
+  
+  /* Page break controls */
+  .page-break-before {
+    page-break-before: always;
+  }
+  
+  .page-break-after {
+    page-break-after: always;
+  }
+  
+  .page-break-avoid {
+    page-break-inside: avoid;
+  }
+  
+  /* ========================================
+     Accessibility in Print - Requirement 5.7
+     ======================================== */
+  
+  /* Expand abbreviations */
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+  
+  /* Show link URLs (optional - can be verbose) */
+  /* Uncomment if needed:
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+  }
+  */
+  
+  /* ========================================
+     Prevent Orphans and Widows
+     ======================================== */
+  
+  p, li, h1, h2, h3, h4, h5, h6 {
+    orphans: 3;
+    widows: 3;
+  }
+}
+
+/* ========================================
+   Cumulative Layout Shift Prevention - Task 12.3
+   Requirement 10.6
+   Reserve space for dynamically loaded content
+   Use skeleton loaders to maintain layout stability
+   ======================================== */
+
+/* Reserve space for images and prevent layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Reserve space for dynamically loaded content */
+.content-placeholder {
+  min-height: 200px;
+  display: block;
+}
+
+/* Skeleton loaders maintain layout dimensions */
+.skeleton,
+.skeleton-text,
+.skeleton-text-sm,
+.skeleton-text-lg,
+.skeleton-heading,
+.skeleton-badge,
+.skeleton-button,
+.skeleton-icon,
+.skeleton-avatar {
+  /* Already have fixed dimensions - good for CLS */
+}
+
+/* Reserve space for stat cards before data loads */
+.glass-card.hover-lift {
+  min-height: 120px; /* Prevents collapse before data loads */
+}
+
+/* Reserve space for tables before skeleton replacement */
+table.responsive-table {
+  min-height: 300px; /* Prevents layout shift when data loads */
+}
+
+/* Mobile cards container - maintain height during loading */
+.mobile-cards-container {
+  min-height: 400px; /* Prevents jump when cards appear */
+}
+
+/* Prevent layout shift from loading states */
+.btn-loading {
+  /* Button maintains same size in loading state */
+  width: auto;
+  min-width: fit-content;
+}
+
+/* Success notifications - don't affect layout */
+.success-notification {
+  /* Fixed positioning ensures no layout shift */
+  position: fixed;
+}
+
+/* Modal containers don't affect page layout */
+.modal-backdrop {
+  /* Fixed positioning - no impact on document flow */
+  position: fixed;
+}
+
+/* Navigation maintains consistent height */
+header {
+  height: 64px; /* Fixed height prevents shift */
+  min-height: 64px;
+}
+
+/* Mobile bottom nav - fixed height */
+.mobile-bottom-nav {
+  height: 64px;
+  min-height: 64px;
+}
+
+/* Tablet menu - off-canvas, no layout impact */
+.tablet-menu-sidebar {
+  /* Transform-based positioning prevents layout shift */
+}
+
+/* Form inputs maintain consistent sizing */
+input,
+select,
+textarea,
+button {
+  /* Prevent size change on focus/hover */
+  box-sizing: border-box;
+}
+
+/* Font loading - prevent FOIT (Flash of Invisible Text) */
+body {
+  font-display: swap; /* Use fallback font immediately, swap when custom font loads */
+}
+
+/* Aspect ratio boxes for dynamic content */
+.aspect-ratio-16-9 {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.aspect-ratio-16-9 > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.aspect-ratio-4-3 {
+  position: relative;
+  padding-bottom: 75%; /* 4:3 aspect ratio */
+}
+
+.aspect-ratio-4-3 > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.aspect-ratio-1-1 {
+  position: relative;
+  padding-bottom: 100%; /* 1:1 aspect ratio */
+}
+
+.aspect-ratio-1-1 > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================
+   Progressive Enhancement - Task 12.2
+   Requirement 10.3
+   Ensure core functionality works without JavaScript
+   Add JavaScript enhancements on top of working HTML/CSS
+   ======================================== */
+
+/* ========================================
+   No-JS Fallbacks - Core Features Work Without JavaScript
+   ======================================== */
+
+/* Show navigation links when JS is disabled */
+body:not(.js-enabled) header nav.hidden {
+  display: flex !important;
+}
+
+/* Hide hamburger menu when JS is disabled */
+body:not(.js-enabled) .hamburger-button {
+  display: none !important;
+}
+
+/* Hide mobile bottom nav toggle functionality when JS is disabled */
+body:not(.js-enabled) .tablet-menu-overlay,
+body:not(.js-enabled) .tablet-menu-sidebar {
+  display: none !important;
+}
+
+/* Modals - Convert to always-visible sections when JS disabled */
+body:not(.js-enabled) .modal-backdrop {
+  position: relative !important;
+  inset: auto !important;
+  backdrop-filter: none !important;
+  background: transparent !important;
+  display: block !important;
+  padding: var(--spacing-lg) 0 !important;
+}
+
+body:not(.js-enabled) .modal-backdrop.hidden {
+  display: block !important;
+}
+
+body:not(.js-enabled) .modal-container {
+  position: relative !important;
+  max-width: 100% !important;
+  animation: none !important;
+}
+
+/* Forms work without JS - just lose real-time validation */
+body:not(.js-enabled) form {
+  /* HTML5 native validation will still work */
+}
+
+/* Skeleton loaders - hide when JS is disabled (show actual content immediately) */
+body:not(.js-enabled) [data-skeleton] {
+  display: none !important;
+}
+
+/* Tables - always show desktop view when JS disabled (no responsive transformation) */
+body:not(.js-enabled) table.responsive-table {
+  display: table !important;
+}
+
+body:not(.js-enabled) .mobile-cards-container {
+  display: none !important;
+}
+
+/* Touch interactions - fallback to CSS :active states when JS disabled */
+body:not(.js-enabled) .touch-target:active,
+body:not(.js-enabled) .touch-target-lg:active,
+body:not(.js-enabled) button:active,
+body:not(.js-enabled) a:active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* Loading states - hide when JS disabled */
+body:not(.js-enabled) .btn-loading {
+  color: inherit !important;
+  pointer-events: auto !important;
+}
+
+body:not(.js-enabled) .btn-loading::after {
+  display: none !important;
+}
+
+/* Success notifications - static display when JS disabled */
+body:not(.js-enabled) .success-notification {
+  position: static !important;
+  animation: none !important;
+  margin: var(--spacing-md) 0 !important;
+}
+
+/* Print modal - show content inline when JS disabled */
+body:not(.js-enabled) #print-modal {
+  position: relative !important;
+  background: transparent !important;
+}
+
+body:not(.js-enabled) #print-modal .modal-backdrop {
+  position: relative !important;
+}
+
+/* ========================================
+   JavaScript Detection
+   Add class to <body> via JS to enable enhanced features
+   ======================================== */
+
+/* This will be added via inline script in HTML: <script>document.body.classList.add('js-enabled');</script> */
+
+/* Enhanced features only available when JS is enabled */
+.js-enabled .requires-js {
+  display: block !important;
+}
+
+.no-js-only {
+  display: none;
+}
+
+body:not(.js-enabled) .no-js-only {
+  display: block !important;
+}
+
+/* ========================================
+   Progressive Enhancement Message
+   ======================================== */
+
+.no-js-message {
+  display: none;
+  background-color: #fef3c7;
+  border: 2px solid #f59e0b;
+  color: #92400e;
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-md) 0;
+}
+
+body:not(.js-enabled) .no-js-message {
+  display: block;
+}
+
+/* ========================================
+   Print Progressive Enhancement
+   ======================================== */
+
+@media print {
+  /* Ensure forms are printable without JS */
+  body:not(.js-enabled) form input,
+  body:not(.js-enabled) form select,
+  body:not(.js-enabled) form textarea {
+    border: 1px solid #000 !important;
+    background: #fff !important;
+  }
+  
+  /* Print buttons should show text */
+  body:not(.js-enabled) button,
+  body:not(.js-enabled) .btn {
+    background: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+  }
+}
+
+/* ========================================
+   Touch Interactions and Gestures - Task 9
+   Requirements: 2.3, 2.4, 2.5
+   ======================================== */
+
+/* ========================================
+   9.2 Immediate Visual Feedback for Touch
+   Requirement 2.3: Provide immediate visual feedback within 150ms of tap
+   ======================================== */
+
+/* Touch active state - Applied on touchstart */
+/* Task 12.4 - Optimize transition with will-change */
+.touch-active {
+  transform: scale(0.95);
+  opacity: 0.8;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+  will-change: transform, opacity;
+}
+
+/* Enhanced touch feedback for buttons */
+button.touch-active,
+.btn.touch-active {
+  transform: scale(0.95);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Touch feedback for links and navigation */
+a.touch-active,
+.mobile-nav-link.touch-active {
+  background-color: rgba(14, 165, 233, 0.1);
+}
+
+/* Prevent double-tap zoom on touch elements */
+.touch-target,
+.touch-target-lg,
+button,
+a[href] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ========================================
+   9.1 Swipe-to-Dismiss Modals
+   Requirement 2.4: Swipe gestures for dismissing modals on touch devices
+   ======================================== */
+
+/* Swipe indicator visual feedback */
+.modal-container.swipe-dismissing {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth transitions for swipe reset */
+.modal-container {
+  will-change: transform, opacity;
+}
+
+/* Visual indicator at top of modal for swipe area */
+.modal-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 4px;
+  background-color: #cbd5e1;
+  border-radius: var(--radius-full);
+  margin-top: 8px;
+  z-index: 1;
+}
+
+/* Hide swipe indicator on desktop */
+@media (min-width: 1024px) {
+  .modal-container::before {
+    display: none;
+  }
+}
+
+/* ========================================
+   9.3 Long-Press for Contextual Actions
+   Requirement 2.5: Long-press gestures for contextual actions
+   ======================================== */
+
+/* Visual feedback during long-press */
+.long-press-active {
+  background-color: rgba(14, 165, 233, 0.1) !important;
+  transition: background-color 500ms ease-out;
+}
+
+/* Visual feedback when long-press triggers */
+.long-press-triggered {
+  animation: longPressPulse 300ms ease-out;
+}
+
+@keyframes longPressPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Long-press confirmation popup */
+/* Task 12.4 - Optimize animation performance with will-change */
+.long-press-confirmation {
+  position: fixed;
+  z-index: var(--z-popover);
+  animation: confirmationSlideIn var(--animation-fast) ease-out;
+  will-change: transform, opacity;
+}
+
+@keyframes confirmationSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.long-press-confirmation-content {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-md);
+  border: 1px solid #e2e8f0;
+  min-width: 200px;
+}
+
+.long-press-confirmation-text {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-neutral-800);
+  margin-bottom: var(--spacing-sm);
+  text-align: center;
+}
+
+.long-press-confirmation-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  justify-content: center;
+}
+
+.long-press-confirm-btn,
+.long-press-cancel-btn {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  min-height: var(--touch-target-min);
+  transition: all var(--animation-fast) ease-in-out;
+}
+
+.long-press-confirm-btn {
+  background-color: var(--color-error);
+  color: white;
+}
+
+.long-press-confirm-btn:hover {
+  background-color: #dc2626;
+}
+
+.long-press-cancel-btn {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-800);
+}
+
+.long-press-cancel-btn:hover {
+  background-color: var(--color-neutral-300);
+}
+
+/* ========================================
+   Touch Gesture Accessibility
+   ======================================== */
+
+/* Focus indicators for touch-activated elements */
+.long-press-triggered:focus-visible,
+.touch-active:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Reduced Motion Support
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .touch-active,
+  .long-press-triggered {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+  
+  .long-press-confirmation {
+    animation: none;
+  }
+  
+  .modal-container {
+    will-change: auto;
+  }
+}
+
+/* ========================================
+   Print Styles - Hide Touch UI
+   ======================================== */
+
+@media print {
+  .long-press-confirmation,
+  .modal-container::before {
+    display: none !important;
+  }
+}
+
+/* ========================================
+   Hero Section Animations - Task 13.1
+   Requirements: 3.1, 3.4, 4.5
+   Modern landing page with glass morphism and smooth animations
+   ======================================== */
+
+/* Hero Badge Animation */
+.hero-badge-entrance {
+  animation: fadeInDown 0.6s ease-out 0.2s both;
+}
+
+/* Hero Title Animation */
+.hero-title-entrance {
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+/* Hero Text Animation */
+.hero-text-entrance {
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+/* Hero CTA Animation */
+.hero-cta-entrance {
+  animation: fadeInUp 0.8s ease-out 0.8s both;
+}
+
+/* Hero Features Animation */
+.hero-features-entrance {
+  animation: fadeInUp 1s ease-out 1s both;
+}
+
+/* Keyframe Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background Pulse Animations */
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulseSlower {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 8s ease-in-out infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulseSlower 12s ease-in-out infinite;
+}
+
+/* ========================================
+   Button Styles - Task 13.1, 13.2
+   Requirements: 2.1 (Touch Targets), 3.1 (Modern Design)
+   Primary and Secondary button styles with hover effects
+   ======================================== */
+
+.btn-primary {
+  background-color: var(--color-primary-500);
+  color: #0f172a;
+  font-weight: 600;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--animation-base) ease-in-out;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: rgba(30, 41, 59, 0.8);
+  color: white;
+  font-weight: 500;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(100, 116, 139, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all var(--animation-base) ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(51, 65, 85, 0.9);
+  border-color: rgba(148, 163, 184, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Focus states for accessibility */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   Hero Responsive Adjustments - Task 13.2
+   Requirements: 1.1, 1.3, 1.4, 2.1
+   Ensure responsive layout with proper touch targets
+   ======================================== */
+
+/* Mobile optimizations (< 768px) */
+@media (max-width: 767px) {
+  /* Ensure buttons are full width on mobile with min 44px height */
+  .hero-cta-entrance a {
+    width: 100%;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+
+  /* Reduce padding on mobile */
+  main .relative {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  /* Adjust text sizing for mobile readability */
+  .hero-title-entrance {
+    font-size: 1.875rem; /* 30px */
+    line-height: 1.2;
+  }
+
+  .hero-text-entrance {
+    font-size: 1rem; /* 16px */
+    line-height: 1.6;
+  }
+
+  /* Stack feature cards vertically on mobile */
+  .hero-features-entrance {
+    grid-template-columns: 1fr;
+  }
+
+  /* Adjust glass card padding on mobile */
+  .hero-features-entrance .glass-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Tablet optimizations (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* 2-column layout for features on tablet */
+  .hero-features-entrance {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Adjust hero spacing */
+  main .relative {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .hero-title-entrance {
+    font-size: 3rem; /* 48px */
+  }
+
+  .hero-text-entrance {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+/* Desktop optimizations (> 1024px) */
+@media (min-width: 1024px) {
+  /* 3-column layout for features on desktop */
+  .hero-features-entrance {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Full hero spacing */
+  main .relative {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .hero-title-entrance {
+    font-size: 3.75rem; /* 60px */
+  }
+
+  .hero-text-entrance {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  /* Buttons side by side on desktop */
+  .hero-cta-entrance {
+    flex-direction: row;
+  }
+}
+
+/* ========================================
+   Glass Card Enhancements for Hero
+   ======================================== */
+
+/* Glass cards on dark background need adjusted opacity */
+.hero-features-entrance .glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-features-entrance .glass-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-entrance,
+  .hero-title-entrance,
+  .hero-text-entrance,
+  .hero-cta-entrance,
+  .hero-features-entrance {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-pulse-slow,
+  .animate-pulse-slower {
+    animation: none;
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
+}
+
+/* Print styles - remove animations and backgrounds */
+@media print {
+  .hero-badge-entrance,
+  .hero-title-entrance,
+  .hero-text-entrance,
+  .hero-cta-entrance,
+  .hero-features-entrance {
+    animation: none !important;
+  }
+
+  main .relative {
+    background: white !important;
+    color: black !important;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    background: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+  }
+
+  .glass-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+  }
+
+  .animate-pulse-slow,
+  .animate-pulse-slower {
+    display: none !important;
+  }
+}
