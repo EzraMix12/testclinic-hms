@@ -25,12 +25,23 @@
                 <div class="bg-sky-500 text-white p-2 rounded-xl shadow-sm"><i class="fa-solid fa-house-medical text-lg"></i></div>
                 <span class="font-bold text-lg text-slate-900">Test<span class="text-sky-500">Clinic</span></span>
             </a>
-            <nav class="hidden md:flex items-center space-x-1">
+            <nav class="hidden md:flex items-center space-x-1 md:space-x-1">
                 <a href="index.html">Home</a>
                 <a href="dashboard.html">Dashboard & Queue</a>
                 <a href="registry.html">Patient Registry</a>
                 <a href="emr.html">Consultation (EMR)</a>
                 <a href="billing.html" class="nav-active">Billing & Cashier</a>
+            </nav>
+
+            <!-- Mobile Top Navigation - Horizontal Scrollable (< 768px) -->
+            <nav class="md:hidden flex-1 overflow-x-auto scrollbar-hide mx-4" aria-label="Mobile Top Navigation">
+                <div class="flex items-center space-x-4 min-w-max px-2">
+                    <a href="index.html" class="mobile-top-nav-link">Home</a>
+                    <a href="dashboard.html" class="mobile-top-nav-link">Dashboard</a>
+                    <a href="registry.html" class="mobile-top-nav-link">Registry</a>
+                    <a href="emr.html" class="mobile-top-nav-link">EMR</a>
+                    <a href="billing.html" class="mobile-top-nav-link mobile-top-nav-active">Billing</a>
+                </div>
             </nav>
             <div class="flex items-center space-x-3">
                 <!-- Tablet Hamburger Button (768px-1024px) -->
