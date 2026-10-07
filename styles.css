@@ -48,7 +48,7 @@
 }
 
 /* ========================================
-   Mobile Viewport Fix - Prevent Zoom Out
+   Mobile Viewport Fix - Prevent Zoom Out & Horizontal Scroll
    ======================================== */
 
 html, body {
@@ -58,6 +58,34 @@ html, body {
 
 * {
   max-width: 100%;
+}
+
+/* Prevent horizontal scroll from tables */
+table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Break long words in text elements */
+a, span, p, h1, h2, h3, h4, h5, h6, li, td, th, label {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Ensure responsive tables don't overflow */
+.responsive-table {
+  max-width: 100vw !important;
+  overflow-x: auto;
+}
+
+/* Prevent long emails/URLs from causing overflow */
+input[type="email"],
+input[type="url"],
+input[type="text"] {
+  max-width: 100%;
+  min-width: 0;
 }
 
 /* ========================================
@@ -183,13 +211,13 @@ html, body {
 
 /* Dark Mode - Body and Main Elements */
 .dark-theme body {
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
 }
 
 .dark-theme header {
-  background-color: #1e293b;
-  border-bottom-color: #334155;
+  background-color: #1e293b !important;
+  border-bottom-color: #334155 !important;
 }
 
 .dark-theme .glass-card {
@@ -198,37 +226,73 @@ html, body {
 }
 
 .dark-theme .mobile-bottom-nav {
-  background-color: #1e293b;
-  border-top-color: #334155;
+  background-color: #1e293b !important;
+  border-top-color: #334155 !important;
 }
 
 .dark-theme .tablet-menu-sidebar {
-  background-color: #1e293b;
+  background-color: #1e293b !important;
 }
 
-/* Dark Mode - Text Colors */
+/* Dark Mode - Text Colors (Comprehensive) */
 .dark-theme .text-slate-900,
 .dark-theme .text-slate-800,
 .dark-theme .text-slate-700,
-.dark-theme .text-slate-600 {
+.dark-theme .text-slate-600,
+.dark-theme .text-slate-500 {
   color: #e2e8f0 !important;
 }
 
-.dark-theme .text-slate-500 {
+.dark-theme .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+.dark-theme .text-slate-300 {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode - Navigation */
+.dark-theme nav a {
   color: #94a3b8 !important;
 }
 
+.dark-theme nav a:hover,
+.dark-theme nav a.nav-active,
+.dark-theme .mobile-nav-link.mobile-nav-active {
+  color: #38bdf8 !important;
+  background-color: #1e293b !important;
+}
+
 /* Dark Mode - Backgrounds */
-.dark-theme .bg-slate-50 {
+.dark-theme .bg-slate-50,
+.dark-theme .bg-slate-100 {
   background-color: #1e293b !important;
 }
 
 .dark-theme .bg-white {
-  background-color: #1e293b !important;
+  background-color: #0f172a !important;
+}
+
+/* Dark Mode - Icon backgrounds */
+.dark-theme .bg-sky-50 {
+  background-color: rgba(14, 165, 233, 0.2) !important;
+}
+
+.dark-theme .bg-amber-50 {
+  background-color: rgba(251, 191, 36, 0.2) !important;
+}
+
+.dark-theme .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.2) !important;
 }
 
 /* Dark Mode - Borders */
-.dark-theme .border-slate-200 {
+.dark-theme .border-slate-200,
+.dark-theme .border-slate-100 {
+  border-color: #334155 !important;
+}
+
+.dark-theme .divide-slate-100 > * + * {
   border-color: #334155 !important;
 }
 
@@ -246,6 +310,13 @@ html, body {
   color: #64748b !important;
 }
 
+.dark-theme input:focus,
+.dark-theme select:focus,
+.dark-theme textarea:focus {
+  border-color: #0ea5e9 !important;
+  outline-color: #0ea5e9 !important;
+}
+
 /* Dark Mode - Tables */
 .dark-theme table thead {
   background-color: #1e293b !important;
@@ -255,21 +326,61 @@ html, body {
   background-color: #334155 !important;
 }
 
-.dark-theme .divide-slate-100 > * + * {
-  border-color: #334155 !important;
+.dark-theme table th {
+  color: #cbd5e1 !important;
+}
+
+.dark-theme table td {
+  color: #e2e8f0 !important;
+}
+
+/* Dark Mode - Buttons */
+.dark-theme .bg-sky-500 {
+  background-color: #0284c7 !important;
+}
+
+.dark-theme .bg-sky-500:hover {
+  background-color: #0369a1 !important;
+}
+
+/* Dark Mode - Modals */
+.dark-theme .glass-modal {
+  background: rgba(30, 41, 59, 0.98) !important;
+  border-color: rgba(71, 85, 105, 0.5) !important;
+}
+
+.dark-theme .modal-backdrop,
+.dark-theme .glass-overlay {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Dark Mode - Footer */
+.dark-theme footer {
+  background-color: #1e293b !important;
+  border-top-color: #334155 !important;
+  color: #94a3b8 !important;
 }
 
 /* Dark Mode - Theme Toggle Button */
 .dark-theme #theme-toggle {
-  color: #fbbf24;
+  color: #fbbf24 !important;
 }
 
 .dark-theme #theme-toggle:hover {
-  background-color: #334155;
+  background-color: #334155 !important;
 }
 
 #theme-toggle {
   transition: background-color 150ms ease-in-out;
+}
+
+/* Smooth theme transition */
+html {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+body {
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 /* Auto dark mode based on system preference */
@@ -1194,6 +1305,7 @@ nav.hidden.md\\:flex {
     -ms-overflow-style: none; /* IE/Edge - hide scrollbar */
     gap: 0.25rem;
     padding: 0.25rem 0;
+    position: relative;
   }
   
   /* Hide scrollbar for Chrome, Safari, Opera */
@@ -1204,6 +1316,22 @@ nav.hidden.md\\:flex {
   /* Ensure nav items don't wrap */
   header nav.hidden.md\\:flex a {
     flex-shrink: 0;
+  }
+  
+  /* Subtle gradient indicators for scrollable content */
+  header nav.hidden.md\\:flex::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2rem;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+    pointer-events: none;
+  }
+  
+  .dark-theme header nav.hidden.md\\:flex::after {
+    background: linear-gradient(to left, rgba(30, 41, 59, 1), rgba(30, 41, 59, 0));
   }
 }
 
@@ -1668,6 +1796,19 @@ body.modal-open {
   top: var(--spacing-md);
   outline: 2px solid white;
   outline-offset: 2px;
+}
+
+/* Screen reader only text utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 
