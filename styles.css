@@ -4715,72 +4715,7 @@ textarea:focus {
   color: #0ea5e9 !important; /* sky-500 */
   background-color: rgba(14, 165, 233, 0.15) !important;
 }
-/* ========================================
-   DateTime Widget Improvements
-   Better responsive behavior and layout
-   ======================================== */
-
-/* DateTime widget - show only on desktop and hide when space is limited */
+/* Hide datetime widget completely to prevent layout issues */
 #datetime-weather-widget {
-  min-width: 200px;
-  max-width: 280px;
-}
-
-/* Responsive visibility for datetime widget */
-@media (max-width: 1200px) {
-  #datetime-weather-widget {
-    display: none !important;
-  }
-}
-
-/* Compact datetime widget for medium screens */
-@media (min-width: 1201px) and (max-width: 1400px) {
-  #datetime-weather-widget {
-    font-size: 0.75rem;
-  }
-  
-  #datetime-weather-widget .text-right {
-    text-align: right;
-    min-width: 80px;
-  }
-  
-  #datetime-weather-widget #current-time {
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-  
-  #datetime-weather-widget #current-date {
-    font-size: 0.625rem;
-    white-space: nowrap;
-  }
-  
-  #datetime-weather-widget #weather-temp {
-    font-size: 0.75rem;
-  }
-  
-  #datetime-weather-widget #weather-desc {
-    font-size: 0.625rem;
-    max-width: 60px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-/* Full datetime widget for large screens */
-@media (min-width: 1401px) {
-  #datetime-weather-widget {
-    font-size: 0.875rem;
-  }
-}
-
-/* Ensure datetime widget doesn't overflow header */
-@media (min-width: 1024px) {
-  .h-16.flex.items-center.justify-between {
-    overflow: hidden;
-  }
-  
-  .h-16.flex.items-center.justify-between > div:last-child {
-    flex-shrink: 0;
-    min-width: 200px;
-  }
+  display: none !important;
 }
