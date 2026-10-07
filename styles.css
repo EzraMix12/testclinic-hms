@@ -4715,7 +4715,32 @@ textarea:focus {
   color: #0ea5e9 !important; /* sky-500 */
   background-color: rgba(14, 165, 233, 0.15) !important;
 }
-/* Hide datetime widget completely to prevent layout issues */
+/* Show datetime widget on large screens only */
 #datetime-weather-widget {
-  display: none !important;
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  #datetime-weather-widget {
+    display: flex !important;
+  }
+}
+/* Make user dropdown more rectangular */
+#user-dropdown-menu {
+  border-radius: 0.5rem !important; /* 8px instead of 12px */
+}
+
+#user-dropdown-menu .rounded-lg {
+  border-radius: 0.375rem !important; /* 6px for inner elements */
+}
+
+/* Make user dropdown buttons more rectangular */
+#user-dropdown-menu button {
+  border-radius: 0.375rem !important;
+}
+
+/* Rectangular user avatar */
+.w-8.h-8.bg-sky-500,
+.w-12.h-12.bg-sky-500 {
+  border-radius: 0.375rem !important; /* Make avatars more rectangular */
 }
