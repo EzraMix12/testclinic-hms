@@ -403,11 +403,11 @@
 
 /* Glass Card - For content cards with glass effect */
 .glass-card {
-  background: var(--color-glass-light) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   border-radius: var(--radius-lg) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   box-shadow: var(--shadow-glass) !important;
   transition: transform var(--animation-base) ease-in-out,
               box-shadow var(--animation-base) ease-in-out;
