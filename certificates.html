@@ -16,21 +16,73 @@
 </head>
 <body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
 
-    <!-- Navigation Header -->
+    <!-- NAVIGATION BAR -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <a href="index.html" class="flex items-center space-x-3">
                 <div class="bg-sky-500 text-white p-2 rounded-xl shadow-sm">
-                    <i class="fa-solid fa-certificate text-lg"></i>
+                    <i class="fa-solid fa-house-medical text-lg"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-lg text-slate-900 tracking-tight">Medical Certificates</span>
+                    <span class="font-bold text-lg text-slate-900 dark:text-slate-100 tracking-tight">Test<span class="text-sky-500">Clinic</span></span>
+                    <span class="ml-2 text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-medium">Certificates</span>
                 </div>
             </a>
             
+            <nav class="hidden md:flex items-center space-x-1 md:space-x-1">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard & Queue</a>
+                <a href="registry.html">Patient Registry</a>
+                <a href="emr.html">Consultation (EMR)</a>
+                <a href="billing.html">Billing & Cashier</a>
+                <a href="certificates.html" class="nav-active">Certificates</a>
+            </nav>
+
+            <!-- Mobile Top Navigation -->
+            <nav class="md:hidden flex-1 overflow-x-auto scrollbar-hide mx-4" aria-label="Mobile Top Navigation">
+                <div class="flex items-center space-x-4 min-w-max px-2">
+                    <a href="index.html" class="mobile-top-nav-link">Home</a>
+                    <a href="dashboard.html" class="mobile-top-nav-link">Dashboard</a>
+                    <a href="registry.html" class="mobile-top-nav-link">Registry</a>
+                    <a href="emr.html" class="mobile-top-nav-link">EMR</a>
+                    <a href="billing.html" class="mobile-top-nav-link">Billing</a>
+                    <a href="certificates.html" class="mobile-top-nav-link mobile-top-nav-active">Certificates</a>
+                </div>
+            </nav>
+
             <div class="flex items-center space-x-3">
-                <button onclick="history.back()" class="text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg text-sm font-medium transition">
-                    <i class="fa-solid fa-arrow-left mr-2"></i>Back
+                <!-- Tablet Hamburger Button -->
+                <button class="hamburger-button" onclick="openTabletMenu()" aria-label="Open navigation menu" aria-expanded="false" id="hamburger-btn">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+                
+                <!-- DateTime & Weather Widget -->
+                <div id="datetime-weather-widget" class="hidden lg:flex items-center space-x-4 text-sm">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-right">
+                            <div id="current-time" class="font-semibold text-slate-700 dark:text-slate-300">--:--:-- --</div>
+                            <div id="current-date" class="text-xs text-slate-500 dark:text-slate-400">Loading...</div>
+                        </div>
+                        <div class="flex items-center space-x-2 pl-3 border-l border-slate-300 dark:border-slate-600">
+                            <img id="weather-icon" src="" alt="Weather" class="w-6 h-6" style="display:none;">
+                            <div>
+                                <div id="weather-temp" class="font-semibold text-slate-700 dark:text-slate-300">--°C</div>
+                                <div id="weather-desc" class="text-xs text-slate-500 dark:text-slate-400">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" 
+                        class="touch-target flex items-center justify-center rounded-lg hover:bg-slate-100 transition-colors" 
+                        aria-label="Switch to dark mode" 
+                        title="Toggle theme">
+                    <i class="fa-solid fa-sun text-lg text-slate-600" id="theme-icon"></i>
+                </button>
+                
+                <button onclick="resetForm()" class="text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg text-sm font-medium transition">
+                    <i class="fa-solid fa-redo mr-1"></i>Reset
                 </button>
             </div>
         </div>
@@ -184,6 +236,30 @@
             </div>
         </div>
     </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+        <a href="index.html" class="mobile-nav-link" aria-label="Home">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            <span>Home</span>
+        </a>
+        <a href="dashboard.html" class="mobile-nav-link" aria-label="Dashboard">
+            <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+            <span>Queue</span>
+        </a>
+        <a href="registry.html" class="mobile-nav-link" aria-label="Registry">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
+            <span>Registry</span>
+        </a>
+        <a href="emr.html" class="mobile-nav-link" aria-label="EMR">
+            <i class="fa-solid fa-file-medical" aria-hidden="true"></i>
+            <span>EMR</span>
+        </a>
+        <a href="certificates.html" class="mobile-nav-link mobile-nav-active" aria-label="Certificates">
+            <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+            <span>Certificates</span>
+        </a>
+    </nav>
 
     <script>
         let currentCertType = 'medical';
@@ -358,7 +434,14 @@
         }
     </script>
 
+    <script src="storage.js"></script>
+    <script src="form-validation.js"></script>
+    <script src="animation-utils.js"></script>
+    <script src="touch-interactions.js"></script>
+    <script src="will-change-manager.js"></script>
+    <script src="responsive-fix.js"></script>
     <script src="theme-toggle.js"></script>
+    <script src="datetime-weather.js"></script>
 
     <style>
         .cert-type-active {
