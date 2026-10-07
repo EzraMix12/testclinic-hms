@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Medical Certificates - TestClinic HMS</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="bg-sky-500 text-white p-2 rounded-xl shadow-sm">
+                    <i class="fa-solid fa-certificate text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg text-slate-900 tracking-tight">Medical Certificates</span>
+                </div>
+            </a>
+            
+            <div class="flex items-center space-x-3">
+                <button onclick="history.back()" class="text-slate-600 hover:text-slate-900 px-3 py-2 rounded-lg text-sm font-medium transition">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>Back
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Certificate Type Selection -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-slate-900 mb-2">Generate Medical Certificate</h1>
+            <p class="text-slate-600">Select certificate type and fill in the required information</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Certificate Form -->
+            <div class="lg:col-span-2">
+                <div class="glass-card p-6 space-y-6">
+                    
+                    <!-- Certificate Type -->
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-3">Certificate Type</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <button onclick="selectCertType('medical')" id="btn-medical" class="cert-type-btn cert-type-active p-4 border border-sky-200 rounded-lg text-left hover:border-sky-400 transition">
+                                <i class="fa-solid fa-file-medical text-sky-600 text-lg mb-2"></i>
+                                <div class="font-semibold text-sky-800">Medical Certificate</div>
+                                <div class="text-xs text-sky-600">General health clearance</div>
+                            </button>
+                            
+                            <button onclick="selectCertType('fitness')" id="btn-fitness" class="cert-type-btn p-4 border border-slate-200 rounded-lg text-left hover:border-sky-400 transition">
+                                <i class="fa-solid fa-running text-slate-600 text-lg mb-2"></i>
+                                <div class="font-semibold text-slate-800">Fit to Work</div>
+                                <div class="text-xs text-slate-600">Employment clearance</div>
+                            </button>
+                            
+                            <button onclick="selectCertType('school')" id="btn-school" class="cert-type-btn p-4 border border-slate-200 rounded-lg text-left hover:border-sky-400 transition">
+                                <i class="fa-solid fa-graduation-cap text-slate-600 text-lg mb-2"></i>
+                                <div class="font-semibold text-slate-800">School Clearance</div>
+                                <div class="text-xs text-slate-600">Educational requirement</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Patient Selection -->
+                    <div>
+                        <label for="patient-select" class="block text-sm font-semibold text-slate-700 mb-2">Patient</label>
+                        <select id="patient-select" onchange="loadPatientInfo()" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500">
+                            <option value="">Select patient...</option>
+                        </select>
+                    </div>
+
+                    <!-- Patient Info (Auto-filled) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="patient-name" class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                            <input type="text" id="patient-name" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500" readonly>
+                        </div>
+                        <div>
+                            <label for="patient-age" class="block text-sm font-semibold text-slate-700 mb-2">Age</label>
+                            <input type="text" id="patient-age" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Certificate Details -->
+                    <div class="space-y-4">
+                        <div>
+                            <label for="purpose" class="block text-sm font-semibold text-slate-700 mb-2">Purpose</label>
+                            <input type="text" id="purpose" placeholder="e.g., Employment requirement, School enrollment" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500">
+                        </div>
+                        
+                        <div>
+                            <label for="findings" class="block text-sm font-semibold text-slate-700 mb-2">Medical Findings</label>
+                            <textarea id="findings" rows="3" placeholder="Physical examination findings and health status" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="recommendations" class="block text-sm font-semibold text-slate-700 mb-2">Recommendations</label>
+                            <textarea id="recommendations" rows="3" placeholder="Medical recommendations or restrictions (if any)" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Selection -->
+                    <div>
+                        <label for="doctor-select" class="block text-sm font-semibold text-slate-700 mb-2">Attending Physician</label>
+                        <select id="doctor-select" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg focus:ring-2 focus:ring-sky-500">
+                            <option value="Dr. Sarah Jenkins">Dr. Sarah Jenkins, MD - General Practitioner</option>
+                            <option value="Dr. Michael Chen">Dr. Michael Chen, MD - Internal Medicine</option>
+                        </select>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-4">
+                        <button onclick="generateCertificate()" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            <i class="fa-solid fa-file-pdf mr-2"></i>Generate Certificate
+                        </button>
+                        <button onclick="previewCertificate()" class="flex-1 bg-slate-500 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            <i class="fa-solid fa-eye mr-2"></i>Preview
+                        </button>
+                        <button onclick="resetForm()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            <i class="fa-solid fa-redo mr-2"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificate Preview -->
+            <div class="lg:col-span-1">
+                <div class="glass-card p-6">
+                    <h3 class="font-bold text-slate-900 mb-4">Certificate Preview</h3>
+                    
+                    <div id="certificate-preview" class="bg-white border border-slate-200 rounded-lg p-6 text-sm">
+                        <div class="text-center mb-6">
+                            <div class="text-sky-600 text-2xl font-bold">TestClinic</div>
+                            <div class="text-slate-600 text-xs">Modern Healthcare Solutions</div>
+                            <div class="text-slate-500 text-xs">123 Healthcare Street, Medical City</div>
+                            <div class="text-slate-500 text-xs">Tel: (02) 8123-4567</div>
+                        </div>
+                        
+                        <div class="text-center mb-6">
+                            <h2 class="text-lg font-bold text-slate-900" id="preview-title">MEDICAL CERTIFICATE</h2>
+                        </div>
+                        
+                        <div class="space-y-4 text-slate-700">
+                            <p><strong>Date:</strong> <span id="preview-date">[Date]</span></p>
+                            <p><strong>Patient:</strong> <span id="preview-patient">[Patient Name]</span></p>
+                            <p><strong>Age:</strong> <span id="preview-age">[Age]</span></p>
+                            <p><strong>Purpose:</strong> <span id="preview-purpose">[Purpose]</span></p>
+                            
+                            <div class="my-4">
+                                <p><strong>This is to certify that:</strong></p>
+                                <div class="bg-slate-50 p-3 rounded mt-2">
+                                    <p id="preview-findings" class="text-sm">[Medical findings will appear here]</p>
+                                </div>
+                            </div>
+                            
+                            <div class="my-4">
+                                <p><strong>Recommendations:</strong></p>
+                                <div class="bg-slate-50 p-3 rounded mt-2">
+                                    <p id="preview-recommendations" class="text-sm">[Recommendations will appear here]</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 text-center">
+                                <p><strong id="preview-doctor">[Doctor Name]</strong></p>
+                                <p class="text-sm">Attending Physician</p>
+                                <p class="text-xs text-slate-500">License No: MD-12345</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentCertType = 'medical';
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPatients();
+            updatePreview();
+            setCurrentDate();
+        });
+
+        // Set current date
+        function setCurrentDate() {
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('preview-date').textContent = formattedDate;
+        }
+
+        // Load patients from storage
+        function loadPatients() {
+            const patients = JSON.parse(localStorage.getItem('pulse_patients')) || [];
+            const select = document.getElementById('patient-select');
+            
+            patients.forEach(patient => {
+                const option = document.createElement('option');
+                option.value = patient.id;
+                option.textContent = `${patient.name} (${patient.age} years old)`;
+                select.appendChild(option);
+            });
+        }
+
+        // Load selected patient info
+        function loadPatientInfo() {
+            const patientId = document.getElementById('patient-select').value;
+            if (!patientId) {
+                document.getElementById('patient-name').value = '';
+                document.getElementById('patient-age').value = '';
+                return;
+            }
+
+            const patients = JSON.parse(localStorage.getItem('pulse_patients')) || [];
+            const patient = patients.find(p => p.id == patientId);
+            
+            if (patient) {
+                document.getElementById('patient-name').value = patient.name;
+                document.getElementById('patient-age').value = patient.age;
+                updatePreview();
+            }
+        }
+
+        // Select certificate type
+        function selectCertType(type) {
+            currentCertType = type;
+            
+            // Update button states
+            document.querySelectorAll('.cert-type-btn').forEach(btn => {
+                btn.classList.remove('cert-type-active');
+                btn.classList.add('border-slate-200');
+            });
+            
+            document.getElementById(`btn-${type}`).classList.add('cert-type-active');
+            
+            // Update certificate title
+            const titles = {
+                medical: 'MEDICAL CERTIFICATE',
+                fitness: 'CERTIFICATE OF FITNESS TO WORK',
+                school: 'SCHOOL HEALTH CLEARANCE'
+            };
+            
+            document.getElementById('preview-title').textContent = titles[type];
+            
+            // Set default findings based on type
+            const defaultFindings = {
+                medical: 'The above-named patient has been examined and found to be in good physical condition with no apparent signs of communicable disease.',
+                fitness: 'The above-named individual has undergone medical examination and is found to be physically and mentally fit to perform the duties and responsibilities of the intended work.',
+                school: 'The above-named student has undergone medical examination and is found to be free from any contagious or communicable disease and is fit for school activities.'
+            };
+            
+            document.getElementById('findings').value = defaultFindings[type];
+            document.getElementById('recommendations').value = 'No restrictions. Maintain regular health check-ups.';
+            
+            updatePreview();
+        }
+
+        // Update certificate preview
+        function updatePreview() {
+            const patientName = document.getElementById('patient-name').value || '[Patient Name]';
+            const patientAge = document.getElementById('patient-age').value || '[Age]';
+            const purpose = document.getElementById('purpose').value || '[Purpose]';
+            const findings = document.getElementById('findings').value || '[Medical findings]';
+            const recommendations = document.getElementById('recommendations').value || '[Recommendations]';
+            const doctor = document.getElementById('doctor-select').value || '[Doctor Name]';
+            
+            document.getElementById('preview-patient').textContent = patientName;
+            document.getElementById('preview-age').textContent = patientAge + ' years old';
+            document.getElementById('preview-purpose').textContent = purpose;
+            document.getElementById('preview-findings').textContent = findings;
+            document.getElementById('preview-recommendations').textContent = recommendations;
+            document.getElementById('preview-doctor').textContent = doctor;
+        }
+
+        // Add event listeners for real-time preview updates
+        document.getElementById('purpose').addEventListener('input', updatePreview);
+        document.getElementById('findings').addEventListener('input', updatePreview);
+        document.getElementById('recommendations').addEventListener('input', updatePreview);
+        document.getElementById('doctor-select').addEventListener('change', updatePreview);
+
+        // Generate certificate (simulate PDF generation)
+        function generateCertificate() {
+            const patientName = document.getElementById('patient-name').value;
+            const purpose = document.getElementById('purpose').value;
+            
+            if (!patientName || !purpose) {
+                alert('Please select a patient and enter the purpose for the certificate.');
+                return;
+            }
+            
+            // Simulate PDF generation
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            loadingMsg.innerHTML = `
+                <div class="bg-white rounded-lg p-6 text-center">
+                    <i class="fa-solid fa-spinner fa-spin text-sky-500 text-3xl mb-4"></i>
+                    <p class="text-slate-700">Generating PDF certificate...</p>
+                </div>
+            `;
+            document.body.appendChild(loadingMsg);
+            
+            setTimeout(() => {
+                document.body.removeChild(loadingMsg);
+                alert(`✅ Medical certificate generated successfully!\n\nPatient: ${patientName}\nType: ${currentCertType.toUpperCase()}\nPurpose: ${purpose}\n\n📄 Certificate saved to: TestClinic_Certificate_${Date.now()}.pdf`);
+            }, 2000);
+        }
+
+        // Preview certificate
+        function previewCertificate() {
+            const preview = document.getElementById('certificate-preview');
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Medical Certificate - Preview</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; }
+                            .certificate { max-width: 600px; margin: 0 auto; padding: 20px; border: 2px solid #0ea5e9; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="certificate">${preview.innerHTML}</div>
+                        <script>window.print(); window.close();</script>
+                    </body>
+                </html>
+            `);
+        }
+
+        // Reset form
+        function resetForm() {
+            if (confirm('Reset form? All entered data will be lost.')) {
+                document.getElementById('patient-select').value = '';
+                document.getElementById('patient-name').value = '';
+                document.getElementById('patient-age').value = '';
+                document.getElementById('purpose').value = '';
+                document.getElementById('findings').value = '';
+                document.getElementById('recommendations').value = '';
+                selectCertType('medical');
+                updatePreview();
+            }
+        }
+    </script>
+
+    <script src="theme-toggle.js"></script>
+
+    <style>
+        .cert-type-active {
+            background-color: #eff6ff !important;
+            border-color: #0ea5e9 !important;
+        }
+        
+        .cert-type-active i {
+            color: #0ea5e9 !important;
+        }
+        
+        .cert-type-active .font-semibold {
+            color: #0369a1 !important;
+        }
+        
+        .cert-type-active .text-xs {
+            color: #0284c7 !important;
+        }
+    </style>
+</body>
+</html>
