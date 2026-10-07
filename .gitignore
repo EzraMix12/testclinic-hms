@@ -45,6 +45,10 @@ GITHUB-UPLOAD-GUIDE.md
 QUICK-START.md
 styles-documentation.md
 
+# Keep production deployment guide
+!PRODUCTION-DEPLOYMENT.md
+!WEATHER-API-SETUP.md
+
 # Test JS
 design-tokens.test.js
 
