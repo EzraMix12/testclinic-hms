@@ -4209,3 +4209,151 @@ a[href] {
     display: none !important;
   }
 }
+
+/* ========================================
+   Landing Page Specific Styles
+   Enhanced hero section and CTA buttons
+   ======================================== */
+
+/* Enhanced CTA Buttons for Landing Page */
+.btn-primary {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: white;
+  border: none;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(14, 165, 233, 0.4);
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Enhanced Glass Cards for Features */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Top Navigation Links */
+.mobile-top-nav-link {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  color: #64748b;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mobile-top-nav-link:hover {
+  background-color: rgba(14, 165, 233, 0.1);
+  color: #0ea5e9;
+}
+
+.mobile-top-nav-active {
+  background-color: rgba(14, 165, 233, 0.15);
+  color: #0ea5e9 !important;
+  font-weight: 600;
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 640px) {
+  /* Better spacing for mobile hero */
+  .hero-title-entrance {
+    font-size: 2.25rem !important; /* 36px */
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  
+  /* Improved mobile feature cards */
+  .glass-card {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Better mobile CTA buttons */
+  .btn-primary,
+  .btn-secondary {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+  }
+}
+
+/* Tablet Responsiveness Improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Better tablet layout for feature cards */
+  .hero-features-entrance {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  /* Improved tablet navigation */
+  .tablet-menu-sidebar {
+    width: 320px;
+  }
+  
+  /* Better tablet button sizing */
+  .btn-primary,
+  .btn-secondary {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+  
+  /* Better tablet hero text */
+  .hero-title-entrance {
+    font-size: 3rem; /* 48px */
+  }
+}
+
+/* Dark Mode Support for Landing Page */
+.dark-theme .btn-secondary {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(100, 116, 139, 0.3);
+  color: #e2e8f0;
+}
+
+.dark-theme .btn-secondary:hover {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(100, 116, 139, 0.5);
+}
+
+.dark-theme .glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(100, 116, 139, 0.2);
+}
+
+.dark-theme .hover-lift:hover {
+  border-color: rgba(100, 116, 139, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
