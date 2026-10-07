@@ -106,6 +106,7 @@ class DateTimeWeather {
             const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
             iconElement.src = iconUrl;
             iconElement.alt = data.weather[0].description;
+            iconElement.style.display = 'block'; // Show icon when API is working
         }
         
         if (locationElement) {

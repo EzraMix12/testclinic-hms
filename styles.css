@@ -427,6 +427,49 @@ input[type="text"] {
   color: #f1f5f9 !important;
 }
 
+/* Dark Mode - DateTime & Weather Widget */
+.datetime-weather-glass {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(226, 232, 240, 0.5) !important;
+}
+
+.dark-theme .datetime-weather-glass {
+  background: rgba(30, 41, 59, 0.5) !important;
+  border-color: rgba(71, 85, 105, 0.5) !important;
+}
+
+.datetime-weather-border {
+  border-color: rgba(226, 232, 240, 0.5);
+}
+
+.dark-theme .datetime-weather-border {
+  border-color: rgba(71, 85, 105, 0.5) !important;
+}
+
+.datetime-weather-text-primary {
+  color: #0f172a !important;
+}
+
+.dark-theme .datetime-weather-text-primary {
+  color: #f1f5f9 !important;
+}
+
+.datetime-weather-text-secondary {
+  color: #475569 !important;
+}
+
+.dark-theme .datetime-weather-text-secondary {
+  color: #94a3b8 !important;
+}
+
+.datetime-weather-divider {
+  background-color: #cbd5e1;
+}
+
+.dark-theme .datetime-weather-divider {
+  background-color: #475569 !important;
+}
+
 /* Dark Mode - Footer */
 .dark-theme footer {
   background-color: #1e293b !important;
