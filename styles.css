@@ -3461,7 +3461,9 @@ header {
 
 /* Tablet menu - off-canvas, no layout impact */
 .tablet-menu-sidebar {
-  /* Transform-based positioning prevents layout shift */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 9999;
 }
 
 /* Form inputs maintain consistent sizing */
@@ -3568,6 +3570,9 @@ body:not(.js-enabled) .modal-container {
 /* Forms work without JS - just lose real-time validation */
 body:not(.js-enabled) form {
   /* HTML5 native validation will still work */
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 /* Skeleton loaders - hide when JS is disabled (show actual content immediately) */
