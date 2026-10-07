@@ -351,7 +351,80 @@ input[type="text"] {
 
 .dark-theme .modal-backdrop,
 .dark-theme .glass-overlay {
-  background: rgba(0, 0, 0, 0.7) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Dark Mode - Modal Container */
+.dark-theme .modal-container {
+  background: #1e293b !important;
+  border: 1px solid rgba(71, 85, 105, 0.5) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Dark Mode - Modal Headers and Text */
+.dark-theme .modal-container h3,
+.dark-theme .modal-container h4,
+.dark-theme .modal-container label {
+  color: #f1f5f9 !important;
+}
+
+.dark-theme .modal-container p,
+.dark-theme .modal-container span {
+  color: #cbd5e1 !important;
+}
+
+/* Dark Mode - Modal Form Inputs */
+.dark-theme .modal-container input,
+.dark-theme .modal-container select,
+.dark-theme .modal-container textarea {
+  background: #0f172a !important;
+  border-color: #475569 !important;
+  color: #f1f5f9 !important;
+}
+
+.dark-theme .modal-container input::placeholder,
+.dark-theme .modal-container textarea::placeholder {
+  color: #64748b !important;
+}
+
+.dark-theme .modal-container input:focus,
+.dark-theme .modal-container select:focus,
+.dark-theme .modal-container textarea:focus {
+  background: #1e293b !important;
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1) !important;
+}
+
+/* Dark Mode - Select Options */
+.dark-theme .modal-container select option {
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+}
+
+/* Dark Mode - Modal Buttons */
+.dark-theme .modal-container button:not(.btn-primary):not(.btn-success) {
+  background: #334155 !important;
+  color: #f1f5f9 !important;
+  border-color: #475569 !important;
+}
+
+.dark-theme .modal-container button:not(.btn-primary):not(.btn-success):hover {
+  background: #475569 !important;
+}
+
+/* Dark Mode - Modal Borders */
+.dark-theme .modal-container .border-slate-100,
+.dark-theme .modal-container .border-slate-200 {
+  border-color: #334155 !important;
+}
+
+/* Dark Mode - Modal Close Button */
+.dark-theme .modal-container .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.dark-theme .modal-container .text-slate-500:hover {
+  color: #f1f5f9 !important;
 }
 
 /* Dark Mode - Footer */
